@@ -1,8 +1,7 @@
-import MainPage from '../../pages/main/main';
-import { AppProps } from '../../types/place-card';
+import AppRouter from '../../router/router';
 
-export default function App({ places }: AppProps) {
+export default function App() {
   return (
-    <MainPage places={places}/>
+    <AppRouter />
   );
 }
