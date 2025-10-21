@@ -1,17 +1,22 @@
-import { useState } from 'react';
 import { PlaceCardI } from '../../types/offer-type';
 import OfferCard from '../offer-card/offer-card';
 
 interface OffersListProps {
     offers: PlaceCardI[];
     size?: boolean;
+    cardClass: string;
+    onListItemHover: (placeId: string) => void
+    onListItemBlur: () => void
 }
 
-export default function OffersList({ offers, size }: OffersListProps) {
-  const [isActive, setIsActive] = useState<null | string>(null);
+export default function OffersList({ offers, size, cardClass, onListItemHover, onListItemBlur }: OffersListProps) {
+  const handleListItemHover = (offerId: string) => {
+    onListItemHover(offerId)
+  }
 
-  // eslint-disable-next-line no-console
-  console.log(isActive);
+  const handleListItemBlur = () => {
+    onListItemBlur();
+  }
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -20,8 +25,9 @@ export default function OffersList({ offers, size }: OffersListProps) {
           key={offer.id}
           offer={offer}
           size={size}
-          onMouseOver={() => setIsActive(offer.id)}
-          onMouseLeave={() => setIsActive(null)}
+          cardClass={cardClass}
+          onMouseOver={() => handleListItemHover(offer.id)}
+          onMouseLeave={() => handleListItemBlur()}
         />
       ))}
     </div>
