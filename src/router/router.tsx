@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../types/const';
 import { offers } from '../mocks/offers';
 import { favorites } from '../mocks/favorites';
+import { city } from '../mocks/city';
 import MainPage from '../pages/main/main';
 import Favorites from '../pages/favorites/favorites';
 import Login from '../pages/login/login';
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage offers={offers} />
+        element: <MainPage offers={offers} city={city} />
       },
       {
         path: AppRoute.Favorites,

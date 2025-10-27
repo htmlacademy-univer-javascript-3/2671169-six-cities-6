@@ -13,7 +13,7 @@ export default function OfferCard({ offer, size, onMouseOver, onMouseLeave }: Pl
   return (
     <article
       className={`${size ? 'cities__card' : 'favorites__card'} place-card`}
-      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseOver}
       onMouseLeave={onMouseLeave}
     >
       {offer.isPremium && (
