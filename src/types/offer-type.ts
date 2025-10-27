@@ -7,13 +7,13 @@ export interface PlaceCardI {
     rating: number;
     title: string;
     type: string;
-    image: string;
+    previewImage: string;
 }
 
 export interface City {
     name: string;
 }
 
-export interface AppProps {
-    places: PlaceCardI[];
+export interface OffersProps {
+    offers: PlaceCardI[];
 }
