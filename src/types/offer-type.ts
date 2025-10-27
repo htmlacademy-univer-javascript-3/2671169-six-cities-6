@@ -8,16 +8,16 @@ export interface PlaceCardI {
     title: string;
     type: string;
     previewImage: string;
-    location: PointI
+    location: PointI;
 }
 
 export type City = {
     name: string;
     location: {
-        latitude: number,
-        longitude: number,
+        latitude: number;
+        longitude: number;
         zoom: number;
-    }
+    };
 };
 
 export interface PointI {

@@ -5,21 +5,21 @@ import { OffersProps, PointI } from '../../types/offer-type';
 import CitiesList from '../../components/cities-list/cities-list';
 
 export default function MainPage({ offers, city }: OffersProps): JSX.Element {
-  const points = offers.map((offer) => offer.location)
+  const points = offers.map((offer) => offer.location);
 
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
 
   const handleListItemHover = (placeId: string) => {
-    const currentOffer = offers.find((offer) => offer.id === placeId)
+    const currentOffer = offers.find((offer) => offer.id === placeId);
     const currentPoint = points.find((point) => point.title === currentOffer?.title);
     if (currentPoint) {
       setSelectedPoint(currentPoint);
     }
-  }
+  };
 
   const handleListItemBlur = () => {
-    setSelectedPoint(undefined)
-  }
+    setSelectedPoint(undefined);
+  };
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
