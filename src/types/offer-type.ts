@@ -8,12 +8,26 @@ export interface PlaceCardI {
     title: string;
     type: string;
     previewImage: string;
+    location: PointI
 }
 
-export interface City {
+export type City = {
     name: string;
+    location: {
+        latitude: number,
+        longitude: number,
+        zoom: number;
+    }
+};
+
+export interface PointI {
+    title: string;
+    lat: number;
+    lng: number;
+    zoom: number;
 }
 
 export interface OffersProps {
     offers: PlaceCardI[];
+    city: City;
 }

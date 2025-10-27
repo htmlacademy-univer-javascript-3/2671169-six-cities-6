@@ -1,4 +1,4 @@
-import CommentForm from '../../components/comment-form/comment-form';
+import CommentForm from '../../components/review-form/review-form';
 
 export default function Offer(): JSX.Element {
   return (
