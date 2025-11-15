@@ -8,7 +8,7 @@ import MapComponent from '../../components/map-component/map-component';
 
 interface OfferProps {
   reviews: ReviewI[];
-  nearPlaces: PlaceCardI[]
+  nearPlaces: PlaceCardI[];
 }
 
 export default function Offer({ reviews, nearPlaces }: OfferProps): JSX.Element {
@@ -17,16 +17,16 @@ export default function Offer({ reviews, nearPlaces }: OfferProps): JSX.Element 
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
 
   const handleListItemHover = (placeId: string) => {
-    const currentOffer = nearPlaces.find((place) => place.id === placeId)
+    const currentOffer = nearPlaces.find((place) => place.id === placeId);
     const currentPoint = points.find((point) => point.title === currentOffer?.title);
     if (currentPoint) {
       setSelectedPoint(currentPoint);
     }
-  }
+  };
 
   const handleListItemBlur = () => {
-    setSelectedPoint(undefined)
-  }
+    setSelectedPoint(undefined);
+  };
 
   return (
     <div className="page">

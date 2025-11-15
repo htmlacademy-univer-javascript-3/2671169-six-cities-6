@@ -5,18 +5,18 @@ interface OffersListProps {
     offers: PlaceCardI[];
     size?: boolean;
     cardClass: string;
-    onListItemHover: (placeId: string) => void
-    onListItemBlur: () => void
+    onListItemHover: (placeId: string) => void;
+    onListItemBlur: () => void;
 }
 
 export default function OffersList({ offers, size, cardClass, onListItemHover, onListItemBlur }: OffersListProps) {
   const handleListItemHover = (offerId: string) => {
-    onListItemHover(offerId)
-  }
+    onListItemHover(offerId);
+  };
 
   const handleListItemBlur = () => {
     onListItemBlur();
-  }
+  };
 
   return (
     <div className="cities__places-list places__list tabs__content">

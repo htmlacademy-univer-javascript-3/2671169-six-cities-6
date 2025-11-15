@@ -1,5 +1,5 @@
 export interface UserI {
-    name: string,
-    avatarUrl: string,
-    isPro: boolean
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
 }
