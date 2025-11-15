@@ -1,45 +1,32 @@
+import { useState } from 'react';
+import MapComponent from '../../components/map-component/map-component';
 import OffersList from '../../components/offers-list/offers-list';
-import { OffersProps } from '../../types/offer-type';
+import { OffersProps, PointI } from '../../types/offer-type';
+import CitiesList from '../../components/cities-list/cities-list';
 
-export default function MainPage({ offers }: OffersProps): JSX.Element {
+export default function MainPage({ offers, city }: OffersProps): JSX.Element {
+  const points = offers.map((offer) => offer.location);
+
+  const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
+
+  const handleListItemHover = (placeId: string) => {
+    const currentOffer = offers.find((offer) => offer.id === placeId);
+    const currentPoint = points.find((point) => point.title === currentOffer?.title);
+    if (currentPoint) {
+      setSelectedPoint(currentPoint);
+    }
+  };
+
+  const handleListItemBlur = () => {
+    setSelectedPoint(undefined);
+  };
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
@@ -63,11 +50,16 @@ export default function MainPage({ offers }: OffersProps): JSX.Element {
                 </ul>
               </form>
 
-              <OffersList offers={offers} size />
+              <OffersList
+                offers={offers}
+                size
+                onListItemHover={handleListItemHover}
+                onListItemBlur={handleListItemBlur}
+              />
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <MapComponent city={city} points={points} selectedPoint={selectedPoint} mapClass="cities__map" />
             </div>
           </div>
         </div>
