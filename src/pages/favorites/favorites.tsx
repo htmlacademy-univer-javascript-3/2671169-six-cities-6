@@ -43,7 +43,7 @@ export default function Favorites({ offers }: FavoritesProps) {
                   </div>
                   <div className="favorites__places">
                     {groupOffersByCity[city].map((offer) => (
-                      <OfferCard key={offer.id} offer={offer}/>
+                      <OfferCard key={offer.id} offer={offer} cardClass='favorites'/>
                     ))}
                   </div>
                 </li>

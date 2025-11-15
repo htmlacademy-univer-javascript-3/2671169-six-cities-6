@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function CommentForm() {
+export default function ReviewForm() {
   const [formData, setFormData] = useState({
     rating: '',
     review: ''

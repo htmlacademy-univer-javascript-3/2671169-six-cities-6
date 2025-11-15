@@ -2,14 +2,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../types/const';
 import { offers } from '../mocks/offers';
 import { favorites } from '../mocks/favorites';
-import { city } from '../mocks/city';
+import { reviews } from '../mocks/reviews';
+import { nearPlaces } from '../mocks/near-places';
 import MainPage from '../pages/main/main';
 import Favorites from '../pages/favorites/favorites';
 import Login from '../pages/login/login';
 import Offer from '../pages/offer/offer';
 import Layout from '../components/layout/layout';
-import NotFoundScreen from '../components/notFoundScreen/not-found-screen';
+import NotFoundScreen from '../components/not-found-screen/not-found-screen';
 import PrivateRoute from '../components/private-route/private-route';
+import { city } from '../mocks/city';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: AppRoute.Offer,
-        element: <Offer />
+        element: <Offer reviews={reviews} nearPlaces={nearPlaces}/>
       },
     ],
   },

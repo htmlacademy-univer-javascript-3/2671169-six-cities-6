@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom';
 interface PlaceCardProps {
   offer: PlaceCardI;
   size?: boolean;
+  cardClass: string;
   onMouseOver?: MouseEventHandler;
   onMouseLeave?: MouseEventHandler;
 }
 
-export default function OfferCard({ offer, size, onMouseOver, onMouseLeave }: PlaceCardProps) {
+export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouseLeave }: PlaceCardProps) {
   return (
     <article
-      className={`${size ? 'cities__card' : 'favorites__card'} place-card`}
+      className={`${cardClass}__card place-card`}
       onMouseEnter={onMouseOver}
       onMouseLeave={onMouseLeave}
     >

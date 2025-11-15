@@ -2,13 +2,14 @@ import { PlaceCardI } from '../../types/offer-type';
 import OfferCard from '../offer-card/offer-card';
 
 interface OffersListProps {
-  offers: PlaceCardI[];
-  size?: boolean;
-  onListItemHover: (placeId: string) => void;
-  onListItemBlur: () => void;
+    offers: PlaceCardI[];
+    size?: boolean;
+    cardClass: string;
+    onListItemHover: (placeId: string) => void;
+    onListItemBlur: () => void;
 }
 
-export default function OffersList({ offers, size, onListItemHover, onListItemBlur }: OffersListProps) {
+export default function OffersList({ offers, size, cardClass, onListItemHover, onListItemBlur }: OffersListProps) {
   const handleListItemHover = (offerId: string) => {
     onListItemHover(offerId);
   };
@@ -24,6 +25,7 @@ export default function OffersList({ offers, size, onListItemHover, onListItemBl
           key={offer.id}
           offer={offer}
           size={size}
+          cardClass={cardClass}
           onMouseOver={() => handleListItemHover(offer.id)}
           onMouseLeave={() => handleListItemBlur()}
         />

@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import MapComponent from '../../components/map-component/map-component';
-import OffersList from '../../components/offers-list/offers-list';
-import { OffersProps, PointI } from '../../types/offer-type';
 import CitiesList from '../../components/cities-list/cities-list';
+import MapComponent from '../../components/map-component/map-component';
+import { city } from '../../mocks/city';
+import { useState } from 'react';
+import { OffersProps, PointI } from '../../types/offer-type';
+import OffersList from '../../components/offers-list/offers-list';
 
-export default function MainPage({ offers, city }: OffersProps): JSX.Element {
+export default function MainPage({ offers }: OffersProps): JSX.Element {
   const points = offers.map((offer) => offer.location);
 
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
@@ -53,13 +54,14 @@ export default function MainPage({ offers, city }: OffersProps): JSX.Element {
               <OffersList
                 offers={offers}
                 size
+                cardClass="cities"
                 onListItemHover={handleListItemHover}
                 onListItemBlur={handleListItemBlur}
               />
 
             </section>
             <div className="cities__right-section">
-              <MapComponent city={city} points={points} selectedPoint={selectedPoint} mapClass="cities__map" />
+              <MapComponent city={city} points={points} selectedPoint={selectedPoint} mapClass="cities__map"/>
             </div>
           </div>
         </div>
