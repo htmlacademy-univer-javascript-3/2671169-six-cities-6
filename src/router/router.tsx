@@ -11,6 +11,7 @@ import Offer from '../pages/offer/offer';
 import Layout from '../components/layout/layout';
 import NotFoundScreen from '../components/not-found-screen/not-found-screen';
 import PrivateRoute from '../components/private-route/private-route';
+import { city } from '../mocks/city';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage offers={offers} />
+        element: <MainPage offers={offers} city={city} />
       },
       {
         path: AppRoute.Favorites,

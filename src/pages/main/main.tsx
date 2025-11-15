@@ -21,7 +21,6 @@ export default function MainPage({ offers }: OffersProps): JSX.Element {
   const handleListItemBlur = () => {
     setSelectedPoint(undefined);
   };
-
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">

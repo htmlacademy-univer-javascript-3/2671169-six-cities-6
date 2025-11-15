@@ -29,4 +29,5 @@ export interface PointI {
 
 export interface OffersProps {
     offers: PlaceCardI[];
+    city: City;
 }
