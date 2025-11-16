@@ -5,6 +5,7 @@ export const reviews: ReviewI[] = [
     id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
     date: '2019-04-24T14:13:56.569Z',
     user: {
+      id: 'user-1',
       name: 'Max',
       avatarUrl: 'img/avatar-max.jpg',
       isPro: false

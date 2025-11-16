@@ -2,12 +2,15 @@ import { Link } from 'react-router-dom';
 import { PlaceCardI } from '../../types/offer-type';
 import OfferCard from '../../components/offer-card/offer-card';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux';
 
 export interface FavoritesProps {
   offers: PlaceCardI[];
 }
 
-export default function Favorites({ offers }: FavoritesProps) {
+export default function Favorites() {
+  const offers = useSelector((state: RootState) => state.offers.favorites);
   const groupOffersByCity = useMemo(() => {
     const res: Record<string, PlaceCardI[]> = {};
 
