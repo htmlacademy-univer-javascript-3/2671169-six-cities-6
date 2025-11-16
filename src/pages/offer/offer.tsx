@@ -1,24 +1,28 @@
-import ReviewsList from '../../components/reviews-list/reviews-list';
-import { ReviewI } from '../../types/review';
 import { PlaceCardI, PointI } from '../../types/offer-type';
-import OfferCard from '../../components/offer-card/offer-card';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux';
 import { useState } from 'react';
-import { city } from '../../mocks/city';
+import { city } from '../../mocks/cities';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import OfferCard from '../../components/offer-card/offer-card';
 import MapComponent from '../../components/map-component/map-component';
 
 interface OfferProps {
-  reviews: ReviewI[];
   nearPlaces: PlaceCardI[];
 }
 
-export default function Offer({ reviews, nearPlaces }: OfferProps): JSX.Element {
+export default function Offer({ nearPlaces }: OfferProps): JSX.Element {
+  const reviews = useSelector((state: RootState) => state.offers.reviews);
   const points = nearPlaces.map((place) => place.location);
 
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
 
   const handleListItemHover = (placeId: string) => {
     const currentOffer = nearPlaces.find((place) => place.id === placeId);
-    const currentPoint = points.find((point) => point.title === currentOffer?.title);
+    const currentPoint = points.find((point) =>
+      point.lat === currentOffer?.location.lat
+      && point.lng === currentOffer?.location.lng
+    );
     if (currentPoint) {
       setSelectedPoint(currentPoint);
     }

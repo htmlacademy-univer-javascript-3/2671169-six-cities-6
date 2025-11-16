@@ -8,7 +8,7 @@ export const offers: PlaceCardI[] = [
       location: {
         latitude: 52.37454,
         longitude: 4.897976,
-        zoom: 8
+        zoom: 12
       }
     },
     price: 120,
@@ -19,7 +19,6 @@ export const offers: PlaceCardI[] = [
     type: 'Apartment',
     previewImage: 'img/apartment-01.jpg',
     location: {
-      title: 'Beautiful &amp; luxurious apartment at great location',
       lat: 52.3909553943508,
       lng: 4.85309666406198,
       zoom: 8
@@ -32,7 +31,7 @@ export const offers: PlaceCardI[] = [
       location: {
         latitude: 52.37454,
         longitude: 4.897976,
-        zoom: 8
+        zoom: 12
       }
     },
     price: 80,
@@ -43,7 +42,6 @@ export const offers: PlaceCardI[] = [
     type: 'Room',
     previewImage: 'img/room.jpg',
     location: {
-      title: 'Wood and stone place',
       lat: 52.3609553943508,
       lng: 4.85309666406198,
       zoom: 8
@@ -56,7 +54,7 @@ export const offers: PlaceCardI[] = [
       location: {
         latitude: 52.37454,
         longitude: 4.897976,
-        zoom: 8
+        zoom: 12
       }
     },
     price: 132,
@@ -67,7 +65,6 @@ export const offers: PlaceCardI[] = [
     type: 'Apartment',
     previewImage: 'img/apartment-02.jpg',
     location: {
-      title: 'Canal View Prinsengracht',
       lat: 52.3909553943508,
       lng: 4.929309666406198,
       zoom: 8
@@ -80,7 +77,7 @@ export const offers: PlaceCardI[] = [
       location: {
         latitude: 52.37454,
         longitude: 4.897976,
-        zoom: 8
+        zoom: 12
       }
     },
     price: 180,
@@ -91,7 +88,6 @@ export const offers: PlaceCardI[] = [
     type: 'Apartment',
     previewImage: 'img/apartment-03.jpg',
     location: {
-      title: 'Nice, cozy, warm big bed apartment',
       lat: 52.3809553943508,
       lng: 4.939309666406198,
       zoom: 8
@@ -104,7 +100,7 @@ export const offers: PlaceCardI[] = [
       location: {
         latitude: 52.37454,
         longitude: 4.897976,
-        zoom: 8
+        zoom: 12
       }
     },
     price: 80,
@@ -115,7 +111,6 @@ export const offers: PlaceCardI[] = [
     type: 'Room',
     previewImage: 'img/room.jpg',
     location: {
-      title: 'Wood and stone place',
       lat: 52.3609553943508,
       lng: 4.85309666406198,
       zoom: 8

@@ -1,36 +1,28 @@
-export default function CitiesList() {
+import { CITIES } from "../../types/const";
+
+interface CitiesListProps {
+  changeCity: (cityName: string) => void;
+  currentCity: string;
+}
+
+export default function CitiesList({ changeCity, currentCity }: CitiesListProps): JSX.Element {
+  
   return (
     <ul className="locations__list tabs__list">
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Paris</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Cologne</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Brussels</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item tabs__item--active">
-          <span>Amsterdam</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Hamburg</span>
-        </a>
-      </li>
-      <li className="locations__item">
-        <a className="locations__item-link tabs__item" href="#">
-          <span>Dusseldorf</span>
-        </a>
-      </li>
+      {CITIES.map((city) => (
+        <li className="locations__item" key={city}>
+          <a
+            className={`locations__item-link tabs__item ${city === currentCity ? 'tabs__item--active' : ''}`}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              changeCity(city);
+            }}
+          >
+            <span>{city}</span>
+          </a>
+        </li>
+      ))}
     </ul>
   );
 }

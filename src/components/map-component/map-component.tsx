@@ -40,7 +40,7 @@ export default function MapComponent({ city, points, selectedPoint, mapClass }: 
         });
 
         marker.setIcon(
-          selectedPoint !== undefined && point.title === selectedPoint.title
+          selectedPoint !== undefined && point.lat === selectedPoint.lat && point.lng === selectedPoint.lng
             ? currentCustomIcon
             : defaultCustomIcon
         )

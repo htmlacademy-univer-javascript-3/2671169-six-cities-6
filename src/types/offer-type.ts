@@ -11,17 +11,18 @@ export interface PlaceCardI {
     location: PointI;
 }
 
+export type Location = {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+}
+
 export type City = {
     name: string;
-    location: {
-        latitude: number;
-        longitude: number;
-        zoom: number;
-    };
+    location: Location;
 };
 
 export interface PointI {
-    title: string;
     lat: number;
     lng: number;
     zoom: number;
