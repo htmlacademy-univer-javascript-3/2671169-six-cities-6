@@ -13,3 +13,11 @@ export enum AuthStatus {
 }
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export type SortingOptionsType = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
+export const SORTING_OPTIONS: SortingOptionsType[] = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first'
+];

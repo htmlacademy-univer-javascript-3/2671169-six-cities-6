@@ -27,8 +27,3 @@ export interface PointI {
     lng: number;
     zoom: number;
 }
-
-export interface OffersProps {
-    offers: PlaceCardI[];
-    city: City;
-}

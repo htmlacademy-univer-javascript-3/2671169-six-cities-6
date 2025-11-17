@@ -8,12 +8,12 @@ import { reviews } from '../../mocks/reviews';
 
 export default function App() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(getOffers(offers));
     dispatch(getFavorites(favorites));
-    dispatch(getReviews(reviews))
-  }, [dispatch, offers])
+    dispatch(getReviews(reviews));
+  }, [dispatch]);
 
   return (
     <AppRouter />

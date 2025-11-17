@@ -1,4 +1,4 @@
-import { ReviewI } from '../../types/review';
+import { ReviewI } from '../../types/reviews';
 
 interface ReviewProps {
     review: ReviewI;
