@@ -3,46 +3,49 @@ import MapComponent from '../../components/map-component/map-component';
 import CitiesList from '../../components/cities-list/cities-list';
 import OffersList from '../../components/offers-list/offers-list';
 import { useDispatch, useSelector } from 'react-redux';
+import { PlaceCardI, PointI } from '../../types/offer-type';
+import { SortingOptionsType } from '../../types/const';
+import { useMemo, useState } from 'react';
 import { changeCity } from '../../redux/slices/offers';
 import { RootState } from '../../redux';
-import { useMemo, useState } from 'react';
-import { PointI } from '../../types/offer-type';
 
 export default function MainPage(): JSX.Element {
   const dispatch = useDispatch();
 
-  const offers = useSelector((state: RootState) => state.offers.offers)
-  const cityName = useSelector((state: RootState) => state.offers.city)
+  const offers = useSelector((state: RootState) => state.offers.offers);
+  const cityName = useSelector((state: RootState) => state.offers.city);
 
-  const points = offers.map((offer) => offer.location);
-
-  const cityOffers = useMemo(() => {
-    return offers.filter((offer) => offer.city.name === cityName);
-  }, [offers, cityName]);
+  const cityOffers = useMemo(() =>
+    offers.filter((offer) => offer.city.name === cityName),
+  [offers, cityName]);
 
   const currentCity = cityOffers[0]?.city;
 
+  const points = cityOffers.map((offer) => offer.location);
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
 
-  const handleChangeCity = (cityName: string) => {
-    dispatch(changeCity(cityName));
-  }
+  const handleChangeCity = (city: string) => {
+    dispatch(changeCity(city));
+  };
 
-  const handleListItemHover = (placeId: string) => {
-    const currentOffer = cityOffers.find((offer) => offer.id === placeId);
-    const currentPoint = points.find((point) =>
-      point.lat === currentOffer?.location.lat &&
-      point.lng === currentOffer?.location.lng
-    );
+  const [option, setOption] = useState<SortingOptionsType>('Popular');
 
-    if (currentPoint) {
-      setSelectedPoint(currentPoint);
+  const sortedOffers = useMemo(() => {
+    switch (option) {
+      case 'Price: low to high':
+        setOption(option);
+        return [...cityOffers].sort((a: PlaceCardI, b: PlaceCardI) => a.price - b.price);
+      case 'Price: high to low':
+        setOption(option);
+        return [...cityOffers].sort((a: PlaceCardI, b: PlaceCardI) => b.price - a.price);
+      case 'Top rated first':
+        setOption(option);
+        return [...cityOffers].sort((a: PlaceCardI, b: PlaceCardI) => b.rating - a.rating);
+      default:
+        setOption(option);
+        return cityOffers;
     }
-  };
-
-  const handleListItemBlur = () => {
-    setSelectedPoint(undefined);
-  };
+  }, [cityOffers, option]);
 
   return (
     <div className="page page--gray page--main">
@@ -64,14 +67,17 @@ export default function MainPage(): JSX.Element {
                 {cityOffers.length} places to stay in {cityName}
               </b>
 
-              <PlacesSorting />
+              <PlacesSorting
+                sortingHandler={setOption}
+                activeOption={option}
+              />
 
               <OffersList
-                offers={cityOffers}
+                offers={sortedOffers}
                 size
                 cardClass="cities"
-                onListItemHover={handleListItemHover}
-                onListItemBlur={handleListItemBlur}
+                onListItemHover={setSelectedPoint}
+                onListItemBlur={setSelectedPoint}
               />
 
             </section>

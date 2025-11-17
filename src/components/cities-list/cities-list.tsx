@@ -1,12 +1,12 @@
-import { CITIES } from "../../types/const";
+import { CITIES } from '../../types/const';
 
 interface CitiesListProps {
-  changeCity: (cityName: string) => void;
+  changeCity: (city: string) => void;
   currentCity: string;
 }
 
 export default function CitiesList({ changeCity, currentCity }: CitiesListProps): JSX.Element {
-  
+
   return (
     <ul className="locations__list tabs__list">
       {CITIES.map((city) => (
