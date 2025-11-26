@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PlaceCardI } from '../../types/offer-type';
-import OfferCard from '../../components/offer-card/offer-card';
+import OfferCard from '../../components/offers/offer-card/offer-card';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';

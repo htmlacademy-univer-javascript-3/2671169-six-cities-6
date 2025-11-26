@@ -19,8 +19,8 @@ export const nearPlaces: PlaceCardI[] = [
     type: 'Room',
     previewImage: 'img/room.jpg',
     location: {
-      lat: 52.3609553943508,
-      lng: 4.85309666406198,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 8
     }
   },
@@ -42,8 +42,8 @@ export const nearPlaces: PlaceCardI[] = [
     type: 'Apartment',
     previewImage: 'img/apartment-02.jpg',
     location: {
-      lat: 52.3909553943508,
-      lng: 4.929309666406198,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 8
     }
   },
@@ -65,8 +65,8 @@ export const nearPlaces: PlaceCardI[] = [
     type: 'Apartment',
     previewImage: 'img/apartment-03.jpg',
     location: {
-      lat: 52.3809553943508,
-      lng: 4.939309666406198,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 8
     }
   },

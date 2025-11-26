@@ -1,17 +1,21 @@
-import { useEffect, useState, MutableRefObject, useRef } from 'react';
+import { useEffect, useState, MutableRefObject } from 'react';
 import { Map, TileLayer } from 'leaflet';
 import { City } from '../types/offer-type';
+
+interface LeafletContainer extends HTMLElement {
+  _leaflet_id?: number;
+}
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
   city: City
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
-  const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
-      const instance = new Map(mapRef.current, {
+    const container = mapRef.current as LeafletContainer;
+    if (container && !container._leaflet_id) {
+      const instance = new Map(container, {
         center: {
           lat: city.location.latitude,
           lng: city.location.longitude
@@ -28,11 +32,9 @@ function useMap(
       );
 
       instance.addLayer(layer);
-
       setMap(instance);
-      isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, map, city]);
 
   return map;
 }

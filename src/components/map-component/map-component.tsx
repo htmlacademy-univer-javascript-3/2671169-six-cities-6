@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
-import { Icon, Marker, layerGroup } from 'leaflet';
-import useMap from '../../hooks/use-map';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../mocks/markers';
+import { Icon, Marker, layerGroup } from 'leaflet';
+import { useEffect, useRef } from 'react';
 import { City, PointI } from '../../types/offer-type';
+import useMap from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
 
 interface MapProps {
-    city: City;
-    points: PointI[];
-    selectedPoint: PointI | undefined;
-    mapClass?: string;
+  city: City;
+  points: PointI[];
+  selectedPoint: PointI | undefined;
+  mapClass?: string;
 }
 
 const defaultCustomIcon = new Icon({
@@ -25,9 +25,20 @@ const currentCustomIcon = new Icon({
 });
 
 export default function MapComponent({ city, points, selectedPoint, mapClass }: MapProps) {
-
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  useEffect(() => {
+    if (map) {
+      map.setView(
+        {
+          lat: city.location.latitude,
+          lng: city.location.longitude
+        },
+        city.location.zoom
+      );
+    }
+  }, [city, map]);
 
   useEffect(() => {
     if (map) {
@@ -35,12 +46,12 @@ export default function MapComponent({ city, points, selectedPoint, mapClass }: 
 
       points.forEach((point) => {
         const marker = new Marker({
-          lat: point.lat,
-          lng: point.lng
+          lat: point.latitude,
+          lng: point.longitude
         });
 
         marker.setIcon(
-          selectedPoint !== undefined && point.lat === selectedPoint.lat && point.lng === selectedPoint.lng
+          selectedPoint !== undefined && point.latitude === selectedPoint.latitude && point.longitude === selectedPoint.longitude
             ? currentCustomIcon
             : defaultCustomIcon
         )
@@ -51,7 +62,7 @@ export default function MapComponent({ city, points, selectedPoint, mapClass }: 
         map.removeLayer(markerLayer);
       };
     }
-  }, [city, points, selectedPoint, map]);
+  }, [points, selectedPoint, map]);
 
   return (
     <section

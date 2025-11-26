@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { useState } from 'react';
 import { city } from '../../mocks/cities';
-import ReviewsList from '../../components/reviews-list/reviews-list';
-import OfferCard from '../../components/offer-card/offer-card';
+import ReviewsList from '../../components/review/reviews-list/reviews-list';
+import OfferCard from '../../components/offers/offer-card/offer-card';
 import MapComponent from '../../components/map-component/map-component';
 
 interface OfferProps {
@@ -20,8 +20,8 @@ export default function Offer({ nearPlaces }: OfferProps): JSX.Element {
   const handleListItemHover = (placeId: string) => {
     const currentOffer = nearPlaces.find((place) => place.id === placeId);
     const currentPoint = points.find((point) =>
-      point.lat === currentOffer?.location.lat
-      && point.lng === currentOffer?.location.lng
+      point.latitude === currentOffer?.location.latitude
+      && point.longitude === currentOffer?.location.longitude
     );
     if (currentPoint) {
       setSelectedPoint(currentPoint);
