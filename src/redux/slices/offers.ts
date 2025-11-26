@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { PlaceCardI } from '../../types/offer-type';
 import { ReviewI } from '../../types/reviews';
+import { getOffers } from '../../api';
 
 export interface OffersState {
     city: string;
@@ -27,9 +28,6 @@ const OffersSlice = createSlice({
     changeCity: (state, action: PayloadAction<string>) => {
       state.city = action.payload;
     },
-    getOffers: (state, action: PayloadAction<PlaceCardI[]>) => {
-      state.offers = action.payload;
-    },
     getFavorites: (state, action: PayloadAction<PlaceCardI[]>) => {
       state.favorites = action.payload;
     },
@@ -37,7 +35,21 @@ const OffersSlice = createSlice({
       state.reviews = action.payload;
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getOffers.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getOffers.fulfilled, (state, action: PayloadAction<PlaceCardI[]>) => {
+        state.offers = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getOffers.rejected, (state, action) => {
+        state.error = action.payload as string;
+      });
+  }
 });
 
-export const { changeCity, getOffers, getFavorites, getReviews } = OffersSlice.actions;
+export const { changeCity, getFavorites, getReviews } = OffersSlice.actions;
 export default OffersSlice.reducer;

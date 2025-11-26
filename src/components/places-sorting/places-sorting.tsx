@@ -51,6 +51,7 @@ export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSo
             tabIndex={0}
             onClick={() => {
               sortingHandler(option);
+              handleOpening();
             }}
           >
             {option}

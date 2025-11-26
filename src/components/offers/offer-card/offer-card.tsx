@@ -1,5 +1,5 @@
 import { MouseEventHandler } from 'react';
-import { PlaceCardI } from '../../types/offer-type';
+import { PlaceCardI } from '../../../types/offer-type';
 import { Link } from 'react-router-dom';
 
 interface PlaceCardProps {

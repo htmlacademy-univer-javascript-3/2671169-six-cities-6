@@ -1,6 +1,6 @@
-import { ReviewI } from '../../types/reviews';
+import { ReviewI } from '../../../types/reviews';
 import ReviewForm from '../review-form/review-form';
-import Review from '../review/review';
+import Review from '../review-item/review';
 interface ReviewsListProps {
     reviews: ReviewI[];
 }
