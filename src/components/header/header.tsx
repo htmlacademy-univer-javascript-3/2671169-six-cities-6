@@ -1,4 +1,49 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/redux';
+
+function HeaderNavigation() {
+  const auth = useAppSelector((state) => state.offers.authorizationStatus);
+  const user = useAppSelector((state) => state.offers.user);
+
+  const location = useLocation();
+
+  if (!auth && location.pathname !== '/login') {
+    return (
+      <ul className="header__nav-list">
+        <li className="header__nav-item user">
+          <Link className="header__nav-link header__nav-link--profile" to="/login" >
+            <div className="header__avatar-wrapper user__avatar-wrapper">
+            </div>
+            <span className="header__login">Sign in</span>
+          </Link>
+        </li>
+      </ul>
+    );
+  } else if (auth) {
+    return (
+      <ul className="header__nav-list">
+        <li className="header__nav-item user">
+          <Link className="header__nav-link header__nav-link--profile" to="/favorites">
+            <div className="header__avatar-wrapper user__avatar-wrapper">
+            </div>
+            <span className="header__user-name user__name">
+              {user?.email}
+            </span>
+            <span className="header__favorite-count">3</span>
+          </Link>
+        </li>
+        <li className="header__nav-item">
+          <a className="header__nav-link" href="#">
+            <span className="header__signout">
+              Sign out
+            </span>
+          </a>
+        </li>
+      </ul>
+    );
+  }
+}
+
 
 export default function Header(): JSX.Element {
   return (
@@ -17,28 +62,10 @@ export default function Header(): JSX.Element {
             </Link>
           </div>
           <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to="/favorites">
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                  </div>
-                  <span className="header__user-name user__name">
-                    Oliver.conner@gmail.com
-                  </span>
-                  <span className="header__favorite-count">3</span>
-                </Link>
-              </li>
-              <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">
-                    Sign out
-                  </span>
-                </a>
-              </li>
-            </ul>
+            <HeaderNavigation />
           </nav>
         </div>
       </div>
-    </header>
+    </header >
   );
 }
