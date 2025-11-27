@@ -1,7 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { PlaceCardI } from '../../types/offer-type';
 import { ReviewI } from '../../types/reviews';
-import { getOffers } from '../../api';
+import { getOffers } from '../../api/get-offers';
+import { authorizeUser, loginUser } from '../../api/login';
+import { UserI } from '../../types/user';
 
 export interface OffersState {
     city: string;
@@ -10,6 +12,8 @@ export interface OffersState {
     reviews: ReviewI[];
     isLoading: boolean;
     error: string | null;
+    authorizationStatus: boolean;
+    user: UserI | null;
 }
 
 const initialState: OffersState = {
@@ -18,7 +22,9 @@ const initialState: OffersState = {
   favorites: [],
   reviews: [],
   isLoading: false,
-  error: null
+  error: null,
+  authorizationStatus: false,
+  user: null
 };
 
 const OffersSlice = createSlice({
@@ -46,6 +52,32 @@ const OffersSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getOffers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state) => {
+        state.authorizationStatus = true;
+        state.isLoading = false;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(authorizeUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(authorizeUser.fulfilled, (state, action: PayloadAction<UserI>) => {
+        state.user = action.payload;
+        state.authorizationStatus = true;
+        state.isLoading = false;
+      })
+      .addCase(authorizeUser.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload as string;
       });
   }

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../types/const';
+import { AppRoute } from '../types/const';
 import { nearPlaces } from '../mocks/near-places';
 import NotFoundScreen from '../components/not-found-screen/not-found-screen';
 import PrivateRoute from '../components/private-route/private-route';
@@ -21,9 +21,7 @@ const router = createBrowserRouter([
       {
         path: AppRoute.Favorites,
         element: (
-          <PrivateRoute
-            authStatus={AuthStatus.NotAuth}
-          >
+          <PrivateRoute>
             <Favorites />
           </PrivateRoute>
         )
