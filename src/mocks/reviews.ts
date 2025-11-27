@@ -8,6 +8,8 @@ export const reviews: ReviewI[] = [
       id: 'user-1',
       name: 'Max',
       avatarUrl: 'img/avatar-max.jpg',
+      email: 'somemail@mail.ru',
+      token: 'some-token',
       isPro: false
     },
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
