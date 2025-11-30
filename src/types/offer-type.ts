@@ -1,14 +1,14 @@
 export interface PlaceCardI {
     id: string;
-    city: City;
-    price: number;
-    isPremium: boolean;
-    isFavorite: boolean;
-    rating: number;
     title: string;
     type: string;
-    previewImage: string;
+    price: number;
+    city: City;
     location: PointI;
+    isFavorite: boolean;
+    isPremium: boolean;
+    rating: number;
+    previewImage: string;
 }
 
 export type Location = {
@@ -26,4 +26,20 @@ export interface PointI {
     latitude: number;
     longitude: number;
     zoom: number;
+}
+
+export interface OfferI extends PlaceCardI {
+    description: string;
+    bedrooms: number;
+    goods: string[];
+    host: HostI;
+    images: string[];
+    maxAdults: number;
+}
+
+export interface HostI {
+    id: string;
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
 }

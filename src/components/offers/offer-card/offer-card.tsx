@@ -1,6 +1,8 @@
 import { MouseEventHandler } from 'react';
 import { PlaceCardI } from '../../../types/offer-type';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks/redux';
+import { changeFavoriteStatus } from '../../../api/favorite';
 
 interface PlaceCardProps {
   offer: PlaceCardI;
@@ -11,6 +13,16 @@ interface PlaceCardProps {
 }
 
 export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouseLeave }: PlaceCardProps) {
+  const dispatch = useAppDispatch();
+
+  const handleChangeFavorite = () => {
+    if (offer.isFavorite) {
+      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 0}));
+    } else {
+      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 1}));
+    }
+  };
+
   return (
     <article
       className={`${cardClass}__card place-card`}
@@ -56,6 +68,7 @@ export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouse
       'place-card__bookmark-button--active' : ''
     } button`
             }
+            onClick={handleChangeFavorite}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">

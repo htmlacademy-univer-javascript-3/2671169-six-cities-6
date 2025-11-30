@@ -1,16 +1,17 @@
-import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/redux';
 import { PlaceCardI } from '../../types/offer-type';
-import OfferCard from '../../components/offers/offer-card/offer-card';
+import { AppRoute } from '../../types/const';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux';
+import { Link } from 'react-router-dom';
+import OfferCard from '../../components/offers/offer-card/offer-card';
 
 export interface FavoritesProps {
   offers: PlaceCardI[];
 }
 
 export default function Favorites() {
-  const offers = useSelector((state: RootState) => state.offers.favorites);
+  const offers = useAppSelector((state) => state.offers.favorites);
+
   const groupOffersByCity = useMemo(() => {
     const res: Record<string, PlaceCardI[]> = {};
 
@@ -56,7 +57,7 @@ export default function Favorites() {
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to="/">
+        <Link className="footer__logo-link" to={AppRoute.Root}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </Link>
       </footer>

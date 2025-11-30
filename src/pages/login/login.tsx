@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
-import { authorizeUser } from '../../api/login';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../api/user';
+import { useState } from 'react';
 
 export default function Login(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export default function Login(): JSX.Element {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(authorizeUser(credentials));
+    dispatch(loginUser(credentials));
     setCredentials({ email: '', password: '' });
     navigator('/');
   };

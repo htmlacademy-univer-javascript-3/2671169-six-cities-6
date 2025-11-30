@@ -6,6 +6,20 @@ const api = axios.create({
   timeout: 5000,
 });
 
+let globalNavigate: (path: string) => void;
+
+export const setNavigate = (nav: typeof globalNavigate) => {
+  globalNavigate = nav;
+};
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers['X-Token'] = token;
+  }
+  return config;
+});
+
 api.interceptors.response.use(
   (response) => response,
 
@@ -13,6 +27,8 @@ api.interceptors.response.use(
     if (axios.isAxiosError(error) && error.response?.status === 401) {
       // eslint-disable-next-line no-console
       console.warn('Unauthorized — 401');
+    } else if (axios.isAxiosError(error) && error.response?.status === 404) {
+      window.location.href = '/*';
     }
 
     return Promise.reject(error);
