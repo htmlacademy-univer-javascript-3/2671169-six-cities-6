@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppRoute } from '../types/const';
-import { nearPlaces } from '../mocks/near-places';
 import NotFoundScreen from '../components/not-found-screen/not-found-screen';
 import PrivateRoute from '../components/private-route/private-route';
 import Favorites from '../pages/favorites/favorites';
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: AppRoute.Offer,
-        element: <Offer nearPlaces={nearPlaces}/>
+        element: <Offer />
       },
     ],
   },
