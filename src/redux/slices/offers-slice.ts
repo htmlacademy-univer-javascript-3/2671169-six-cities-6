@@ -1,12 +1,9 @@
 import { getCurrentOffer, getNearPlaces, getOffers } from '../../api/offers';
-import { authorizeUser, loginUser } from '../../api/user';
+import { changeFavoriteStatus, getFavorite } from '../../api/favorite';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getReviewsList, postReview } from '../../api/comments';
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { OfferI, PlaceCardI } from '../../types/offer-type';
 import { ReviewI } from '../../types/reviews';
-import { UserI } from '../../types/user';
-import { AuthStatus } from '../../types/const';
-import { changeFavoriteStatus, getFavorite } from '../../api/favorite';
 
 export interface OffersState {
   city: string;
@@ -20,10 +17,7 @@ export interface OffersState {
   isReviewsLoading: boolean;
   isFavoritesLoading: boolean;
   isNearbyLoading: boolean;
-  isAuthLoading: boolean;
   error: string | null;
-  authorizationStatus: AuthStatus;
-  user: UserI | null;
 }
 
 const initialState: OffersState = {
@@ -38,10 +32,7 @@ const initialState: OffersState = {
   isReviewsLoading: false,
   isFavoritesLoading: false,
   isNearbyLoading: false,
-  isAuthLoading: false,
   error: null,
-  authorizationStatus: AuthStatus.Unknown,
-  user: null
 };
 
 const OffersSlice = createSlice({
@@ -66,35 +57,6 @@ const OffersSlice = createSlice({
         state.isOffersLoading = false;
         state.error = action.payload as string;
       })
-
-      .addCase(loginUser.pending, (state) => {
-        state.isAuthLoading = true;
-        state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.authorizationStatus = AuthStatus.Auth;
-        state.isAuthLoading = false;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.isAuthLoading = false;
-        state.error = action.payload as string;
-      })
-
-      .addCase(authorizeUser.pending, (state) => {
-        state.isAuthLoading = true;
-        state.error = null;
-      })
-      .addCase(authorizeUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.authorizationStatus = AuthStatus.Auth;
-        state.isAuthLoading = false;
-      })
-      .addCase(authorizeUser.rejected, (state, action) => {
-        state.isAuthLoading = false;
-        state.error = action.payload as string;
-      })
-
       .addCase(getCurrentOffer.pending, (state) => {
         state.isCurrentOfferLoading = true;
         state.error = null;

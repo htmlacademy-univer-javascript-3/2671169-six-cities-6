@@ -3,8 +3,8 @@ import { useCallback, useEffect } from 'react';
 import { changeCity } from '../../redux/slices/offers-slice';
 import { getOffers } from '../../api/offers';
 import CitiesContainer from '../../components/cities/cities-container/cities-container';
+import Spinner from '../../components/spinner/spinner';
 import CitiesList from '../../components/cities/cities-list/cities-list';
-import Spinner from '../../spinner/spinner';
 
 export default function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();

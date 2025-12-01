@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { SortingOptionsType } from '../../../types/const';
 import { PlaceCardI, PointI } from '../../../types/offer-type';
 import { useAppSelector } from '../../../hooks/redux';
-import MapComponent from '../../map-component/map-component';
-import OffersList from '../../offers/offers-list/offers-list';
+import { OffersListMemoized } from '../../../hocs';
 import PlacesSorting from '../../places-sorting/places-sorting';
+import MapComponent from '../../map-component/map-component';
 
 export default function CitiesContainer() {
   const offers = useAppSelector((state) => state.offers.offers);
@@ -31,16 +31,16 @@ export default function CitiesContainer() {
     }
   }, [cityOffers, option]);
 
-  const handleListItemBlur = () => {
+  const handleListItemBlur = useCallback(() => {
     setSelectedPoint(undefined);
-  };
+  }, []);
 
-  const handleListItemHover = (offer: PlaceCardI | undefined) => {
+  const handleListItemHover = useCallback((offer: PlaceCardI | undefined) => {
     const currentPoint = offer?.location;
     if (currentPoint) {
       setSelectedPoint(currentPoint);
     }
-  };
+  }, []);
 
   return (
     <div className="cities__places-container container">
@@ -55,7 +55,7 @@ export default function CitiesContainer() {
           activeOption={option}
         />
 
-        <OffersList
+        <OffersListMemoized
           offers={sortedOffers}
           size
           cardClass="cities"

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { SORTING_OPTIONS, SortingOptionsType } from '../../types/const';
 
 interface PlacesSortingProps {
-    sortingHandler: (sortType: SortingOptionsType) => void;
-    activeOption: string;
+  sortingHandler: (sortType: SortingOptionsType) => void;
+  activeOption: string;
 }
 
 export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSortingProps): JSX.Element {

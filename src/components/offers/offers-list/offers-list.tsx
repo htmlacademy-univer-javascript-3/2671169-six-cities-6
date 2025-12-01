@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { PlaceCardI } from '../../../types/offer-type';
 import OfferCard from '../offer-card/offer-card';
 
@@ -10,6 +11,14 @@ interface OffersListProps {
 }
 
 export default function OffersList({ offers, size, cardClass, onListItemHover, onListItemBlur }: OffersListProps) {
+  const handleHoverOffer = useCallback((offer: PlaceCardI) => {
+    onListItemHover(offer);
+  }, [onListItemHover]);
+
+  const handleBlurOffer = useCallback(() => {
+    onListItemBlur();
+  }, [onListItemBlur]);
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
@@ -18,8 +27,8 @@ export default function OffersList({ offers, size, cardClass, onListItemHover, o
           offer={offer}
           size={size}
           cardClass={cardClass}
-          onMouseOver={() => onListItemHover(offer)}
-          onMouseLeave={() => onListItemBlur()}
+          onMouseOver={handleHoverOffer}
+          onMouseLeave={handleBlurOffer}
         />
       ))}
     </div>
