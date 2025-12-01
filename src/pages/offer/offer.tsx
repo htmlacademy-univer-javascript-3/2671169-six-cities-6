@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getCurrentOffer, getNearPlaces } from '../../api/offers';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { PlaceCardI, PointI } from '../../types/offer-type';
+import { OfferCardMemoized } from '../../hocs';
 import { useParams } from 'react-router-dom';
-import { PointI } from '../../types/offer-type';
-import OfferCard from '../../components/offers/offer-card/offer-card';
 import OfferBody from '../../components/offers/offer-body/offer-body';
-import Spinner from '../../spinner/spinner';
+import Spinner from '../../components/spinner/spinner';
 
 export default function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,20 +25,16 @@ export default function Offer(): JSX.Element {
   const points = nearPlaces.map((place) => place.location);
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
 
-  const handleListItemHover = (placeId: string) => {
-    const hoverOffer = nearPlaces.find((place) => place.id === placeId);
-    const currentPoint = points.find((point) =>
-      point.latitude === hoverOffer?.location.latitude
-      && point.longitude === hoverOffer?.location.longitude
-    );
+  const handleListItemHover = useCallback((offer: PlaceCardI) => {
+    const currentPoint = offer?.location;
     if (currentPoint) {
       setSelectedPoint(currentPoint);
     }
-  };
+  }, []);
 
-  const handleListItemBlur = () => {
+  const handleListItemBlur = useCallback(() => {
     setSelectedPoint(undefined);
-  };
+  }, []);
 
   return (
     <div className="page">
@@ -61,13 +57,13 @@ export default function Offer(): JSX.Element {
             ) : (
               <div className="near-places__list places__list">
                 {nearPlaces.map((place) => (
-                  <OfferCard
+                  <OfferCardMemoized
                     key={place.id}
                     offer={place}
                     cardClass="near-places"
                     size
-                    onMouseOver={() => handleListItemHover(place.id)}
-                    onMouseLeave={() => handleListItemBlur()}
+                    onMouseOver={handleListItemHover}
+                    onMouseLeave={handleListItemBlur}
                   />
                 ))}
               </div>

@@ -8,7 +8,7 @@ interface PlaceCardProps {
   offer: PlaceCardI;
   size?: boolean;
   cardClass: string;
-  onMouseOver?: MouseEventHandler;
+  onMouseOver?: (offer: PlaceCardI) => void;
   onMouseLeave?: MouseEventHandler;
 }
 
@@ -17,16 +17,16 @@ export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouse
 
   const handleChangeFavorite = () => {
     if (offer.isFavorite) {
-      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 0}));
+      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 0 }));
     } else {
-      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 1}));
+      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 1 }));
     }
   };
 
   return (
     <article
       className={`${cardClass}__card place-card`}
-      onMouseEnter={onMouseOver}
+      onMouseEnter={() => onMouseOver?.(offer)}
       onMouseLeave={onMouseLeave}
     >
       {offer.isPremium && (

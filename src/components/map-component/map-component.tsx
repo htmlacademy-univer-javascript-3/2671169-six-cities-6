@@ -1,4 +1,4 @@
-import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../mocks/markers';
+import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../types/const';
 import { Icon, Marker, layerGroup } from 'leaflet';
 import { useEffect, useRef } from 'react';
 import { City, PointI } from '../../types/offer-type';

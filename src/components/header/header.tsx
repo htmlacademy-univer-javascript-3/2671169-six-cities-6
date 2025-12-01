@@ -6,15 +6,17 @@ import { getFavorite } from '../../api/favorite';
 
 function HeaderNavigation() {
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.offers.authorizationStatus);
-  const user = useAppSelector((state) => state.offers.user);
+  const auth = useAppSelector((state) => state.user.authorizationStatus);
+  const user = useAppSelector((state) => state.user.user);
   const favorites = useAppSelector((state) => state.offers.favorites);
 
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getFavorite());
-  }, [dispatch]);
+    if (auth) {
+      dispatch(getFavorite());
+    }
+  }, [dispatch, auth]);
 
   if (auth === AuthStatus.Unknown && location.pathname !== '/login') {
     return (

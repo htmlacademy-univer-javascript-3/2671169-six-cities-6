@@ -1,7 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from './utils/axios';
-import { PlaceCardI } from '../types/offer-type';
 import { ChangeFavoriteStatusProps } from '../types/favorites';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { PlaceCardI } from '../types/offer-type';
+import api from './utils/axios';
 
 export const getFavorite = createAsyncThunk(
   '/get/favorite',

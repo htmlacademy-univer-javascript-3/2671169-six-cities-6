@@ -9,7 +9,7 @@ interface ReviewsListProps {
 }
 
 export default function ReviewsList({ reviews, offerId }: ReviewsListProps) {
-  const auth = useAppSelector((state) => state.offers.authorizationStatus);
+  const auth = useAppSelector((state) => state.user.authorizationStatus);
 
   return (
     <section className="offer__reviews reviews">

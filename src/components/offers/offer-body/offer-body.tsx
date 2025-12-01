@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { OfferI, PointI } from '../../../types/offer-type';
 import MapComponent from '../../map-component/map-component';
-import ReviewsList from '../../review/reviews-list/reviews-list';
 import { getReviewsList } from '../../../api/comments';
-import Spinner from '../../../spinner/spinner';
+import Spinner from '../../spinner/spinner';
 import { changeFavoriteStatus } from '../../../api/favorite';
+import { ReviewsListMemoized } from '../../../hocs';
 
 interface OfferBodyProps {
   points: PointI[];
@@ -126,7 +126,7 @@ export default function OfferBody({ points, selectedPoint, currentOffer, offerId
           {isReviewLoading ? (
             <Spinner />
           ) : (
-            <ReviewsList reviews={reviews} offerId={offerId} />
+            <ReviewsListMemoized reviews={reviews} offerId={offerId} />
           )}
         </div>
       </div>
