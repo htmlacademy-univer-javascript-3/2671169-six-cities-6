@@ -1,7 +1,7 @@
-import { getCurrentOffer, getNearPlaces, getOffers } from '../../api/offers';
-import { changeFavoriteStatus, getFavorite } from '../../api/favorite';
+import { getCurrentOffer, getNearPlaces, getOffers } from '../api-actions/offers';
+import { changeFavoriteStatus, getFavorite } from '../api-actions/favorite';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getReviewsList, postReview } from '../../api/comments';
+import { getReviewsList, postReview } from '../api-actions/comments';
 import { OfferI, PlaceCardI } from '../../types/offer-type';
 import { ReviewI } from '../../types/reviews';
 

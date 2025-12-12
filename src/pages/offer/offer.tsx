@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getCurrentOffer, getNearPlaces } from '../../api/offers';
 import { useCallback, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getCurrentOffer, getNearPlaces } from '../../store/api-actions/offers';
 import { PlaceCardI, PointI } from '../../types/offer-type';
 import { OfferCardMemoized } from '../../hocs';
 import { useParams } from 'react-router-dom';
@@ -9,10 +9,10 @@ import Spinner from '../../components/spinner/spinner';
 
 export default function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
-  const nearPlaces = useAppSelector((state) => state.offers.nearPlaces);
-  const currentOffer = useAppSelector((state) => state.offers.currentOffer);
-  const isCurrentOfferLoading = useAppSelector((state) => state.offers.isCurrentOfferLoading);
-  const isNearbyLoading = useAppSelector((state) => state.offers.isNearbyLoading);
+  const { nearPlaces } = useAppSelector((state) => state.offers);
+  const { currentOffer } = useAppSelector((state) => state.offers);
+  const { isCurrentOfferLoading } = useAppSelector((state) => state.offers);
+  const { isNearbyLoading } = useAppSelector((state) => state.offers);
   const { offerId } = useParams<{ offerId: string }>();
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from './utils/axios';
-import { UserI } from '../types/user';
+import { UserI } from '../../types/user';
+import api from '../../api/axios';
 
 export const loginUser = createAsyncThunk(
   '/get/login',
@@ -24,6 +24,20 @@ export const authorizeUser = createAsyncThunk(
       const response = await api.get<UserI>('/login');
       localStorage.setItem('token', response.data.token);
       return response.data;
+    } catch (err: unknown) {
+      const errorMessage =
+        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const logOutUser = createAsyncThunk(
+  '/delete/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await api.delete('/logout');
+      localStorage.removeItem('token');
     } catch (err: unknown) {
       const errorMessage =
         (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';

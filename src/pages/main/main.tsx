@@ -1,15 +1,17 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useCallback, useEffect } from 'react';
-import { changeCity } from '../../redux/slices/offers-slice';
-import { getOffers } from '../../api/offers';
+import { CitiesListMemoized } from '../../hocs';
+import { changeCity } from '../../store/slices/offers-slice';
+import { getOffers } from '../../store/api-actions/offers';
 import CitiesContainer from '../../components/cities/cities-container/cities-container';
+import CitiesContainerEmpty from '../../components/cities/cities-container/cities-container-empty';
 import Spinner from '../../components/spinner/spinner';
-import CitiesList from '../../components/cities/cities-list/cities-list';
 
 export default function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const cityName = useAppSelector((state) => state.offers.city);
   const isOffersLoading = useAppSelector((state) => state.offers.isOffersLoading);
+  const cities = useAppSelector((state) => state.offers.offers);
 
   useEffect(() => {
     dispatch(getOffers());
@@ -28,14 +30,18 @@ export default function MainPage(): JSX.Element {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <CitiesList
+              <CitiesListMemoized
                 changeCity={handleChangeCity}
                 currentCity={cityName}
               />
             </section>
           </div>
           <div className="cities">
-            <CitiesContainer />
+            {cities ? (
+              <CitiesContainer />
+            ) : (
+              <CitiesContainerEmpty city={cityName} />
+            )}
           </div>
         </main>
       )}

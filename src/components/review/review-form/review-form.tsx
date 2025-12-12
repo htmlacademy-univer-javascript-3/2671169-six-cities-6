@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { useAppDispatch } from '../../../hooks/redux';
-import { postReview } from '../../../api/comments';
+import { postReview } from '../../../store/api-actions/comments';
 
 const ratingTitles: Record<number, string> = {
   5: 'perfect',

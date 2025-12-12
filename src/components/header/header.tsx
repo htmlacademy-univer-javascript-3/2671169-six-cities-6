@@ -1,8 +1,9 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { AppRoute, AuthStatus } from '../../types/const';
+import { Link, useLocation } from 'react-router-dom';
+import { getFavorite } from '../../store/api-actions/favorite';
+import { logOutUser } from '../../store/api-actions/user';
 import { useEffect } from 'react';
-import { getFavorite } from '../../api/favorite';
 
 function HeaderNavigation() {
   const dispatch = useAppDispatch();
@@ -11,6 +12,10 @@ function HeaderNavigation() {
   const favorites = useAppSelector((state) => state.offers.favorites);
 
   const location = useLocation();
+
+  const handleLogOut = () => {
+    dispatch(logOutUser());
+  };
 
   useEffect(() => {
     if (auth) {
@@ -43,12 +48,12 @@ function HeaderNavigation() {
             <span className="header__favorite-count">{favorites.length}</span>
           </Link>
         </li>
-        <li className="header__nav-item">
-          <a className="header__nav-link" href="#">
+        <li className="header__nav-item" onClick={handleLogOut}>
+          <Link className="header__nav-link" to={AppRoute.Root}>
             <span className="header__signout">
               Sign out
             </span>
-          </a>
+          </Link>
         </li>
       </ul>
     );

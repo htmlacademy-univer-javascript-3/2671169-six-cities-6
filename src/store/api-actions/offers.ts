@@ -1,6 +1,6 @@
+import { OfferI, PlaceCardI } from '../../types/offer-type';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { OfferI, PlaceCardI } from '../types/offer-type';
-import api from './utils/axios';
+import api from '../../api/axios';
 
 export const getOffers = createAsyncThunk(
   '/get/offers',

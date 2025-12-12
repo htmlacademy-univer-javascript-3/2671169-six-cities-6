@@ -1,30 +1,34 @@
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { AppRoute, AuthStatus } from '../../types/const';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../api/user';
-import { useState } from 'react';
+import { loginUser } from '../../store/api-actions/user';
 
 export default function Login(): JSX.Element {
   const dispatch = useAppDispatch();
-  const [credentials, setCredentials] = useState({
-    email: '', password: ''
-  });
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const navigator = useNavigate();
+  const { authorizationStatus } = useAppSelector((state) => state.user);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(loginUser(credentials));
-    setCredentials({ email: '', password: '' });
-    navigator('/');
+
+    if (emailRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginUser({
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }));
+    }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthStatus.Auth) {
+      navigate(AppRoute.Root);
+    }
+  });
 
   return (
     <div className="page page--gray page--login">
@@ -32,15 +36,14 @@ export default function Login(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form">
+            <form className="login__form form" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
                   className="login__input form__input"
                   type="email"
                   name="email"
-                  value={credentials.email}
-                  onChange={handleChange}
+                  ref={emailRef}
                   placeholder="Email"
                   required
                 />
@@ -51,8 +54,7 @@ export default function Login(): JSX.Element {
                   className="login__input form__input"
                   type="password"
                   name="password"
-                  value={credentials.password}
-                  onChange={handleChange}
+                  ref={passwordRef}
                   placeholder="Password"
                   required
                 />
@@ -60,7 +62,6 @@ export default function Login(): JSX.Element {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                onClick={handleSubmit}
               >
                 Sign in
               </button>

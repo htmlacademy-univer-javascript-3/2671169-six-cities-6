@@ -1,8 +1,9 @@
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { changeFavoriteStatus } from '../../../store/api-actions/favorite';
 import { MouseEventHandler } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { PlaceCardI } from '../../../types/offer-type';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/redux';
-import { changeFavoriteStatus } from '../../../api/favorite';
+import { AuthStatus } from '../../../types/const';
 
 interface PlaceCardProps {
   offer: PlaceCardI;
@@ -14,8 +15,14 @@ interface PlaceCardProps {
 
 export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouseLeave }: PlaceCardProps) {
   const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.user.authorizationStatus);
+
+  const navigator = useNavigate();
 
   const handleChangeFavorite = () => {
+    if (auth !== AuthStatus.Auth) {
+      navigator('/login');
+    }
     if (offer.isFavorite) {
       dispatch(changeFavoriteStatus({ offerId: offer.id, status: 0 }));
     } else {

@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { MapComponentMemoized, ReviewsListMemoized } from '../../../hocs';
+import { changeFavoriteStatus } from '../../../store/api-actions/favorite';
+import { getReviewsList } from '../../../store/api-actions/comments';
 import { OfferI, PointI } from '../../../types/offer-type';
-import MapComponent from '../../map-component/map-component';
-import { getReviewsList } from '../../../api/comments';
+import { useNavigate } from 'react-router-dom';
+import { AuthStatus } from '../../../types/const';
+import { useEffect } from 'react';
 import Spinner from '../../spinner/spinner';
-import { changeFavoriteStatus } from '../../../api/favorite';
-import { ReviewsListMemoized } from '../../../hocs';
 
 interface OfferBodyProps {
   points: PointI[];
@@ -16,15 +17,22 @@ interface OfferBodyProps {
 
 export default function OfferBody({ points, selectedPoint, currentOffer, offerId }: OfferBodyProps) {
   const dispatch = useAppDispatch();
-  const reviews = useAppSelector((state) => state.offers.reviews);
-  const isReviewLoading = useAppSelector((state) => state.offers.isReviewsLoading);
+  const { reviews } = useAppSelector((state) => state.offers);
+  const { isReviewsLoading } = useAppSelector((state) => state.offers);
+  const { authorizationStatus } = useAppSelector((state) => state.user);
   const city = currentOffer?.city;
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     dispatch(getReviewsList(offerId));
   }, [offerId, dispatch]);
 
   const handleChangeFavorite = () => {
+    if (authorizationStatus !== AuthStatus.Auth) {
+      navigator('/login');
+    }
+
     if (currentOffer.isFavorite) {
       dispatch(changeFavoriteStatus({ offerId: currentOffer.id, status: 0 }));
     } else {
@@ -123,7 +131,7 @@ export default function OfferBody({ points, selectedPoint, currentOffer, offerId
               </p>
             </div>
           </div>
-          {isReviewLoading ? (
+          {isReviewsLoading ? (
             <Spinner />
           ) : (
             <ReviewsListMemoized reviews={reviews} offerId={offerId} />
@@ -131,7 +139,7 @@ export default function OfferBody({ points, selectedPoint, currentOffer, offerId
         </div>
       </div>
       {city && (
-        <MapComponent
+        <MapComponentMemoized
           city={city}
           points={points}
           selectedPoint={selectedPoint}
