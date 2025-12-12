@@ -6,12 +6,6 @@ const api = axios.create({
   timeout: 5000,
 });
 
-let globalNavigate: (path: string) => void;
-
-export const setNavigate = (nav: typeof globalNavigate) => {
-  globalNavigate = nav;
-};
-
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {

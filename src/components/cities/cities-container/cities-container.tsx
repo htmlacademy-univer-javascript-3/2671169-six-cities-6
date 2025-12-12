@@ -1,10 +1,9 @@
+import { MapComponentMemoized, OffersListMemoized } from '../../../hocs';
 import { useCallback, useMemo, useState } from 'react';
 import { SortingOptionsType } from '../../../types/const';
 import { PlaceCardI, PointI } from '../../../types/offer-type';
 import { useAppSelector } from '../../../hooks/redux';
-import { OffersListMemoized } from '../../../hocs';
 import PlacesSorting from '../../places-sorting/places-sorting';
-import MapComponent from '../../map-component/map-component';
 
 export default function CitiesContainer() {
   const offers = useAppSelector((state) => state.offers.offers);
@@ -66,7 +65,7 @@ export default function CitiesContainer() {
       </section>
       <div className="cities__right-section">
         {currentCity && (
-          <MapComponent
+          <MapComponentMemoized
             city={currentCity}
             points={points}
             selectedPoint={selectedPoint}

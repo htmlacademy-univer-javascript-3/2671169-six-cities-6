@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from './utils/axios';
-import { PostReviewProps, ReviewI } from '../types/reviews';
+import api from '../../api/axios';
+import { PostReviewProps, ReviewI } from '../../types/reviews';
 
 export const getReviewsList = createAsyncThunk(
   '/get/reviews',
