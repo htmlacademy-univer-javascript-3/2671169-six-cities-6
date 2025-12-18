@@ -23,7 +23,7 @@ describe('Review', () => {
     const avatar = screen.getByAltText('Reviews avatar') ;
 
     expect(avatar).toBeInTheDocument();
-    expect(avatar.src).toBe(mockReview.user.avatarUrl);
+    expect(avatar).toHaveAttribute('src', mockReview.user.avatarUrl);
     expect(avatar).toHaveAttribute('width', '54');
     expect(avatar).toHaveAttribute('height', '54');
   });
