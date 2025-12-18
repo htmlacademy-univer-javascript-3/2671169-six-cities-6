@@ -18,7 +18,7 @@ export default function Review({ review }: ReviewProps) {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${(review.rating * 20)}%` }}></span>
+            <span style={{ width: `${(review.rating * 20)}%` }} data-testid='reviews__stars'></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

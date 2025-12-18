@@ -1,7 +1,7 @@
 import { MapComponentMemoized, OffersListMemoized } from '../../../hocs';
 import { useCallback, useMemo, useState } from 'react';
-import { SortingOptionsType } from '../../../types/const';
-import { PlaceCardI, PointI } from '../../../types/offer-type';
+import { SortingOptionsType } from '../../../const';
+import { PlaceCardI, PointI } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks/redux';
 import PlacesSorting from '../../places-sorting/places-sorting';
 

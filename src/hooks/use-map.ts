@@ -1,6 +1,6 @@
 import { useEffect, useState, MutableRefObject } from 'react';
 import { Map, TileLayer } from 'leaflet';
-import { City } from '../types/offer-type';
+import { City } from '../types/offer';
 
 interface LeafletContainer extends HTMLElement {
   _leaflet_id?: number;

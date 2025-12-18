@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { changeFavoriteStatus } from '../../../store/api-actions/favorite';
 import { MouseEventHandler } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PlaceCardI } from '../../../types/offer-type';
-import { AuthStatus } from '../../../types/const';
+import { PlaceCardI } from '../../../types/offer';
+import { AuthStatus } from '../../../const';
 
 interface PlaceCardProps {
   offer: PlaceCardI;
@@ -11,9 +11,10 @@ interface PlaceCardProps {
   cardClass: string;
   onMouseOver?: (offer: PlaceCardI) => void;
   onMouseLeave?: MouseEventHandler;
+  dataTestId?: string;
 }
 
-export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouseLeave }: PlaceCardProps) {
+export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouseLeave, dataTestId }: PlaceCardProps) {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.user.authorizationStatus);
 
@@ -35,6 +36,7 @@ export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouse
       className={`${cardClass}__card place-card`}
       onMouseEnter={() => onMouseOver?.(offer)}
       onMouseLeave={onMouseLeave}
+      data-testid={dataTestId}
     >
       {offer.isPremium && (
         <div className="place-card__mark">

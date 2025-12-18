@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getCurrentOffer, getNearPlaces } from '../../store/api-actions/offers';
-import { PlaceCardI, PointI } from '../../types/offer-type';
+import { PlaceCardI, PointI } from '../../types/offer';
 import { OfferCardMemoized } from '../../hocs';
 import { useParams } from 'react-router-dom';
 import OfferBody from '../../components/offers/offer-body/offer-body';

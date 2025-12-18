@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { AppRoute, AuthStatus } from '../../types/const';
+import { AppRoute, AuthStatus } from '../../const';
 import { Link, useLocation } from 'react-router-dom';
 import { getFavorite } from '../../store/api-actions/favorite';
-import { logOutUser } from '../../store/api-actions/user';
+import { logoutUser } from '../../store/api-actions/user';
 import { useEffect } from 'react';
 
 function HeaderNavigation() {
@@ -14,7 +14,7 @@ function HeaderNavigation() {
   const location = useLocation();
 
   const handleLogOut = () => {
-    dispatch(logOutUser());
+    dispatch(logoutUser());
   };
 
   useEffect(() => {

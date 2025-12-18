@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { PlaceCardI } from '../../../types/offer-type';
+import { PlaceCardI } from '../../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
 interface OffersListProps {

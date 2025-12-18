@@ -1,24 +1,7 @@
 import { getCurrentOffer, getNearPlaces, getOffers } from '../api-actions/offers';
 import { changeFavoriteStatus, getFavorite } from '../api-actions/favorite';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getReviewsList, postReview } from '../api-actions/comments';
-import { OfferI, PlaceCardI } from '../../types/offer-type';
-import { ReviewI } from '../../types/reviews';
-
-export interface OffersState {
-  city: string;
-  offers: PlaceCardI[];
-  currentOffer: OfferI | null;
-  nearPlaces: PlaceCardI[];
-  favorites: PlaceCardI[];
-  reviews: ReviewI[];
-  isOffersLoading: boolean;
-  isCurrentOfferLoading: boolean;
-  isReviewsLoading: boolean;
-  isFavoritesLoading: boolean;
-  isNearbyLoading: boolean;
-  error: string | null;
-}
+import { OffersState } from '../../types/state';
 
 const initialState: OffersState = {
   city: 'Paris',
@@ -26,16 +9,14 @@ const initialState: OffersState = {
   currentOffer: null,
   nearPlaces: [],
   favorites: [],
-  reviews: [],
   isOffersLoading: false,
   isCurrentOfferLoading: false,
-  isReviewsLoading: false,
   isFavoritesLoading: false,
   isNearbyLoading: false,
   error: null,
 };
 
-const OffersSlice = createSlice({
+export const OffersSlice = createSlice({
   name: 'offers',
   initialState,
   reducers: {
@@ -80,32 +61,6 @@ const OffersSlice = createSlice({
       })
       .addCase(getNearPlaces.rejected, (state, action) => {
         state.isNearbyLoading = false;
-        state.error = action.payload as string;
-      })
-
-      .addCase(getReviewsList.pending, (state) => {
-        state.isReviewsLoading = true;
-        state.error = null;
-      })
-      .addCase(getReviewsList.fulfilled, (state, action) => {
-        state.reviews = action.payload;
-        state.isReviewsLoading = false;
-      })
-      .addCase(getReviewsList.rejected, (state, action) => {
-        state.isReviewsLoading = false;
-        state.error = action.payload as string;
-      })
-
-      .addCase(postReview.pending, (state) => {
-        state.isReviewsLoading = true;
-        state.error = null;
-      })
-      .addCase(postReview.fulfilled, (state, action) => {
-        state.reviews.push(action.payload);
-        state.isReviewsLoading = false;
-      })
-      .addCase(postReview.rejected, (state, action) => {
-        state.isReviewsLoading = false;
         state.error = action.payload as string;
       })
 

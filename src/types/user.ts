@@ -6,3 +6,8 @@ export interface UserI {
     email: string;
     token: string;
 }
+
+export interface UserPostData {
+    email: string;
+    password: string;
+}

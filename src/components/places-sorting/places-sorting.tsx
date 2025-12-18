@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { SORTING_OPTIONS, SortingOptionsType } from '../../types/const';
+import { SORTING_OPTIONS, SortingOptionsType } from '../../const';
 
 interface PlacesSortingProps {
   sortingHandler: (sortType: SortingOptionsType) => void;

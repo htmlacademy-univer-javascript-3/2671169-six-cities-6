@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { AppRoute, AuthStatus } from '../../types/const';
+import { AppRoute, AuthStatus } from '../../const';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../store/api-actions/user';

@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../../hooks/redux';
-import { AuthStatus } from '../../../types/const';
+import { AuthStatus } from '../../../const';
 import { ReviewI } from '../../../types/reviews';
 import ReviewForm from '../review-form/review-form';
-import Review from '../review-item/review';
+import Review from '../review-item/review-item';
 interface ReviewsListProps {
   reviews: ReviewI[];
   offerId: string;
