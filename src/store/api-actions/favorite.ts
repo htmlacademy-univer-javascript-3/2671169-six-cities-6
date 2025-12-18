@@ -1,32 +1,30 @@
 import { ChangeFavoriteStatusProps } from '../../types/favorites';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { PlaceCardI } from '../../types/offer-type';
-import api from '../../api/axios';
+import { PlaceCardI } from '../../types/offer';
+import { ApiRoute } from '../../const';
+import { AxiosInstance } from 'axios';
+import { AppDispatch, RootState } from '../../types/state';
 
-export const getFavorite = createAsyncThunk(
+export const getFavorite = createAsyncThunk<PlaceCardI[], undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/get/favorite',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get<PlaceCardI[]>('/favorite');
-      return response.data;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (_, { extra: api }) => {
+    const { data } = await api.get<PlaceCardI[]>(ApiRoute.Favorites);
+    return data;
   }
 );
 
-export const changeFavoriteStatus = createAsyncThunk(
+export const changeFavoriteStatus = createAsyncThunk<PlaceCardI, ChangeFavoriteStatusProps, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/change/favorite',
-  async ({ offerId, status }: ChangeFavoriteStatusProps, { rejectWithValue }) => {
-    try {
-      const response = await api.post<PlaceCardI>(`/favorite/${offerId}/${status}`);
-      return response.data;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async ({ offerId, status }, { extra: api }) => {
+    const { data } = await api.post<PlaceCardI>(`${ApiRoute.Favorites}/${offerId}/${status}`);
+    return data;
   }
 );

@@ -10,7 +10,7 @@ export interface ReviewI {
 
 export interface PostReviewProps {
   offerId: string;
-  data: {
+  postData: {
     comment: string;
     rating: number;
   };

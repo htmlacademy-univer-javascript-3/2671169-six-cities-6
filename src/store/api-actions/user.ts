@@ -1,47 +1,44 @@
+import { AppDispatch, RootState } from '../../types/state';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UserI } from '../../types/user';
-import api from '../../api/axios';
+import { AxiosInstance } from 'axios';
+import { ApiRoute } from '../../const';
+import { UserI, UserPostData } from '../../types/user';
+import { dropToken, saveToken } from '../../services/token';
 
-export const loginUser = createAsyncThunk(
+export const loginUser = createAsyncThunk<UserI, UserPostData, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/get/login',
-  async (data: { email: string; password: string }, { rejectWithValue }) => {
-    try {
-      const response = await api.post<UserI>('/login', data);
-      localStorage.setItem('token', response.data.token);
-      return response.data;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (userData, { extra: api }) => {
+    const response = await api.post<UserI>(ApiRoute.Login, userData);
+    saveToken(response.data.token);
+    return response.data;
   }
 );
 
-export const authorizeUser = createAsyncThunk(
+export const authorizeUser = createAsyncThunk<UserI, undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/post/login',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get<UserI>('/login');
-      localStorage.setItem('token', response.data.token);
-      return response.data;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (_, { extra: api }) => {
+    const response = await api.get<UserI>(ApiRoute.Login);
+    saveToken(response.data.token);
+    return response.data;
   }
 );
 
-export const logOutUser = createAsyncThunk(
+export const logoutUser = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/delete/logout',
-  async (_, { rejectWithValue }) => {
-    try {
-      await api.delete('/logout');
-      localStorage.removeItem('token');
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (_, { extra: api }) => {
+    await api.delete(ApiRoute.Logout);
+    dropToken();
   }
 );

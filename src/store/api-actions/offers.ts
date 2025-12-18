@@ -1,46 +1,41 @@
-import { OfferI, PlaceCardI } from '../../types/offer-type';
+import { OfferI, PlaceCardI } from '../../types/offer';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../api/axios';
+import { ApiRoute } from '../../const';
+import { AppDispatch, RootState } from '../../types/state';
+import { AxiosInstance } from 'axios';
 
-export const getOffers = createAsyncThunk(
+export const getOffers = createAsyncThunk<PlaceCardI[], undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/get/offers',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await api.get<PlaceCardI[]>('/offers');
-      const result = response.data;
-      return result;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (_, { extra: api }) => {
+    const { data } = await api.get<PlaceCardI[]>(ApiRoute.Offers);
+    return data;
   }
 );
 
-export const getCurrentOffer = createAsyncThunk(
+export const getCurrentOffer = createAsyncThunk<OfferI, string, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/get/current-offer',
-  async (offerId: string, { rejectWithValue }) => {
-    try {
-      const response = await api.get<OfferI>(`/offers/${offerId}`);
-      return response.data;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (offerId, { extra: api }) => {
+    const { data } = await api.get<OfferI>(`${ApiRoute.Offers}/${offerId}`);
+    return data;
   }
 );
 
-export const getNearPlaces = createAsyncThunk(
+export const getNearPlaces = createAsyncThunk<PlaceCardI[], string, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
   '/get/near-places',
-  async (offerId: string, { rejectWithValue }) => {
-    try {
-      const response = await api.get<PlaceCardI[]>(`/offers/${offerId}/nearby`);
-      return response.data;
-    } catch (err: unknown) {
-      const errorMessage =
-        (err as { response?: { data?: { message: string } } }).response?.data?.message || 'Error';
-      return rejectWithValue(errorMessage);
-    }
+  async (offerId, { extra: api }) => {
+    const { data } = await api.get<PlaceCardI[]>(`${ApiRoute.Offers}/${offerId}/nearby`);
+    return data;
   }
 );

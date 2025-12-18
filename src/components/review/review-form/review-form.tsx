@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { useAppDispatch } from '../../../hooks/redux';
-import { postReview } from '../../../store/api-actions/comments';
+import { postReview } from '../../../store/api-actions/review';
 
 const ratingTitles: Record<number, string> = {
   5: 'perfect',
@@ -28,7 +28,7 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(postReview({ offerId, data: formData }));
+    dispatch(postReview({ offerId, postData: formData }));
     setFormData({
       comment: '',
       rating: 0

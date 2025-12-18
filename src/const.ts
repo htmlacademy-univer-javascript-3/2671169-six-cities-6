@@ -1,14 +1,22 @@
 export enum AppRoute {
-    Root = '/',
-    Login ='/login',
-    Offer = '/offers/:offerId',
-    Favorites = '/favorites',
+  Root = '/',
+  Login = '/login',
+  Offer = '/offers/:offerId',
+  Favorites = '/favorites',
 }
 
 export enum AuthStatus {
-    Auth = 'AUTH',
-    NotAuth = 'NOT_AUTH',
-    Unknown = 'UNKNOWN'
+  Auth = 'AUTH',
+  NotAuth = 'NOT_AUTH',
+  Unknown = 'UNKNOWN'
+}
+
+export enum ApiRoute {
+  Offers = '/offers',
+  Reviews = '/comments',
+  Favorites = '/favorite',
+  Login = '/login',
+  Logout = '/logout'
 }
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useCallback, useEffect } from 'react';
 import { CitiesListMemoized } from '../../hocs';
-import { changeCity } from '../../store/slices/offers-slice';
+import { changeCity } from '../../store/offers-data/offers-data';
 import { getOffers } from '../../store/api-actions/offers';
 import CitiesContainer from '../../components/cities/cities-container/cities-container';
 import CitiesContainerEmpty from '../../components/cities/cities-container/cities-container-empty';

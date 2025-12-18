@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute } from '../../types/const';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/redux';
 
 type PrivateRouteProps = {

@@ -1,14 +1,7 @@
+import { authorizeUser, loginUser, logoutUser } from '../api-actions/user';
 import { createSlice } from '@reduxjs/toolkit';
-import { UserI } from '../../types/user';
-import { AuthStatus } from '../../types/const';
-import { authorizeUser, loginUser, logOutUser } from '../api-actions/user';
-
-export interface UserState {
-  isAuthLoading: boolean;
-  error: string | null;
-  authorizationStatus: AuthStatus;
-  user: UserI | null;
-}
+import { AuthStatus } from '../../const';
+import { UserState } from '../../types/state';
 
 const initialState: UserState = {
   isAuthLoading: false,
@@ -17,7 +10,7 @@ const initialState: UserState = {
   user: null
 };
 
-const OffersSlice = createSlice({
+export const UsersSlice = createSlice({
   name: 'offers',
   initialState,
   reducers: {},
@@ -51,20 +44,20 @@ const OffersSlice = createSlice({
         state.error = action.payload as string;
       })
 
-      .addCase(logOutUser.pending, (state) => {
+      .addCase(logoutUser.pending, (state) => {
         state.isAuthLoading = true;
         state.error = null;
       })
-      .addCase(logOutUser.fulfilled, (state) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.authorizationStatus = AuthStatus.Unknown;
         state.isAuthLoading = false;
       })
-      .addCase(logOutUser.rejected, (state, action) => {
+      .addCase(logoutUser.rejected, (state, action) => {
         state.isAuthLoading = false;
         state.error = action.payload as string;
       });
   }
 });
 
-export default OffersSlice.reducer;
+export default UsersSlice.reducer;

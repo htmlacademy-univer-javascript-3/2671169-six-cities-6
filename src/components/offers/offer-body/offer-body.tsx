@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { MapComponentMemoized, ReviewsListMemoized } from '../../../hocs';
 import { changeFavoriteStatus } from '../../../store/api-actions/favorite';
-import { getReviewsList } from '../../../store/api-actions/comments';
-import { OfferI, PointI } from '../../../types/offer-type';
+import { getReviewsList } from '../../../store/api-actions/review';
+import { OfferI, PointI } from '../../../types/offer';
 import { useNavigate } from 'react-router-dom';
-import { AuthStatus } from '../../../types/const';
+import { AuthStatus } from '../../../const';
 import { useEffect } from 'react';
 import Spinner from '../../spinner/spinner';
 
@@ -17,8 +17,8 @@ interface OfferBodyProps {
 
 export default function OfferBody({ points, selectedPoint, currentOffer, offerId }: OfferBodyProps) {
   const dispatch = useAppDispatch();
-  const { reviews } = useAppSelector((state) => state.offers);
-  const { isReviewsLoading } = useAppSelector((state) => state.offers);
+  const { reviews } = useAppSelector((state) => state.reviews);
+  const { isReviewsLoading } = useAppSelector((state) => state.reviews);
   const { authorizationStatus } = useAppSelector((state) => state.user);
   const city = currentOffer?.city;
 

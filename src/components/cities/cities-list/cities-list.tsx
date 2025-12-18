@@ -1,4 +1,4 @@
-import { CITIES } from '../../../types/const';
+import { CITIES } from '../../../const';
 
 interface CitiesListProps {
   changeCity: (city: string) => void;
@@ -18,7 +18,7 @@ export default function CitiesList({ changeCity, currentCity }: CitiesListProps)
               changeCity(city);
             }}
           >
-            <span>{city}</span>
+            <span data-testid="city-list-span">{city}</span>
           </a>
         </li>
       ))}
