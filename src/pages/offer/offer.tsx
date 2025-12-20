@@ -1,8 +1,8 @@
+import { OfferBodyMemoized, OfferCardMemoized } from '../../hocs/memo';
 import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getCurrentOffer, getNearPlaces } from '../../store/api-actions/offers';
 import { PlaceCardI, PointI } from '../../types/offer';
-import { OfferBodyMemoized, OfferCardMemoized } from '../../hocs';
 import { useParams } from 'react-router-dom';
 import Spinner from '../loading/spinner';
 
@@ -15,10 +15,18 @@ export default function Offer(): JSX.Element {
   const { offerId } = useParams<{ offerId: string }>();
 
   useEffect(() => {
-    if (offerId) {
-      dispatch(getCurrentOffer(offerId));
-      dispatch(getNearPlaces(offerId));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (offerId) {
+        dispatch(getCurrentOffer(offerId));
+        dispatch(getNearPlaces(offerId));
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [offerId, dispatch]);
 
   const points = nearPlaces.map((place) => place.location);

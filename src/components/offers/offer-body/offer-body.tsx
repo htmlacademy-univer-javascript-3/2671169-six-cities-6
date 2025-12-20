@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { MapComponentMemoized, ReviewsListMemoized } from '../../../hocs';
+import { MapComponentMemoized, ReviewsListMemoized } from '../../../hocs/memo';
 import { changeFavoriteStatus } from '../../../store/api-actions/favorite';
 import { getReviewsList } from '../../../store/api-actions/review';
 import { OfferI, PointI } from '../../../types/offer';
@@ -23,7 +23,15 @@ export default function OfferBody({ points, selectedPoint, currentOffer }: Offer
   const navigator = useNavigate();
 
   useEffect(() => {
-    dispatch(getReviewsList(currentOffer.id));
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(getReviewsList(currentOffer.id));
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [currentOffer.id, dispatch]);
 
   const handleChangeFavorite = () => {

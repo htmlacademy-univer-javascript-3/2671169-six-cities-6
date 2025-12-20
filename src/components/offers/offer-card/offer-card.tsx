@@ -24,11 +24,7 @@ export default function OfferCard({ offer, size, cardClass, onMouseOver, onMouse
     if (auth !== AuthStatus.Auth) {
       navigator('/login');
     }
-    if (offer.isFavorite) {
-      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 0 }));
-    } else {
-      dispatch(changeFavoriteStatus({ offerId: offer.id, status: 1 }));
-    }
+    dispatch(changeFavoriteStatus({ offerId: offer.id, status: offer.isFavorite ? 0 : 1 }));
   };
 
   return (

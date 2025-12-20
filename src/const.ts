@@ -5,12 +5,6 @@ export enum AppRoute {
   Favorites = '/favorites',
 }
 
-export enum AuthStatus {
-  Auth = 'AUTH',
-  NotAuth = 'NOT_AUTH',
-  Unknown = 'UNKNOWN'
-}
-
 export enum ApiRoute {
   Offers = '/offers',
   Reviews = '/comments',
@@ -19,9 +13,23 @@ export enum ApiRoute {
   Logout = '/logout'
 }
 
+export enum AuthStatus {
+  Auth = 'AUTH',
+  NotAuth = 'NOT_AUTH',
+  Unknown = 'UNKNOWN'
+}
+
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export type SortingOptionsType = 'Popular' | 'Price: low to high' | 'Price: high to low' | 'Top rated first';
+
+export const enum SortOptions {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRated = 'Top rated first'
+}
+
 export const SORTING_OPTIONS: SortingOptionsType[] = [
   'Popular',
   'Price: low to high',

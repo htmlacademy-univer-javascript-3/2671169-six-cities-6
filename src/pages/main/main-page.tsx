@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useCallback, useEffect } from 'react';
-import { CitiesListMemoized } from '../../hocs';
+import { CitiesListMemoized } from '../../hocs/memo';
 import { changeCity } from '../../store/offers-data/offers-data';
 import { getOffers } from '../../store/api-actions/offers';
 import OffersContainer from '../../components/offers/offers-container/offers-container';
@@ -14,7 +14,15 @@ export default function MainPage(): JSX.Element {
   const { offers } = useAppSelector((state) => state.offers);
 
   useEffect(() => {
-    dispatch(getOffers());
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(getOffers());
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 
   const handleChangeCity = useCallback((city: string) => {
@@ -31,7 +39,7 @@ export default function MainPage(): JSX.Element {
           <div className="tabs">
             <section className="locations container">
               <CitiesListMemoized
-                changeCity={handleChangeCity}
+                onChangeCity={handleChangeCity}
                 currentCity={cityName}
               />
             </section>
