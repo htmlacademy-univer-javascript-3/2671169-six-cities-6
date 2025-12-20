@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
+import { CITIES } from '../../const';
 import CitiesList from './cities-list';
-import { CITIES } from '../../../const';
+import userEvent from '@testing-library/user-event';
 
 describe('CitiesList', () => {
   const mockChangeCity = vi.fn();
-
 
   it('should render list of cities', () => {
     render(
@@ -19,8 +19,8 @@ describe('CitiesList', () => {
     });
   });
 
-  it('should add class "active" to tab with current city', () => {
-    const currentCity = CITIES[2];
+  it('should add "active" status to tab with current city', () => {
+    const currentCity = CITIES[0];
 
     render(
       <CitiesList
@@ -36,7 +36,7 @@ describe('CitiesList', () => {
     expect(activeCityLink).toHaveClass('tabs__item--active');
   });
 
-  it('should not add class "active" to non-active cities', () => {
+  it('should not add "active" status to non-active cities', () => {
     const currentCity = CITIES[0];
 
     render(
@@ -51,5 +51,22 @@ describe('CitiesList', () => {
       .closest('a');
 
     expect(inactiveCityLink).not.toHaveClass('tabs__item--active');
+  });
+
+  it('changeCity should be called when change prop currentCity', async () => {
+    render(
+      <CitiesList
+        currentCity={CITIES[0]}
+        changeCity={mockChangeCity}
+      />
+    );
+
+    const inactiveCityLink = screen
+      .getByText(CITIES[1]);
+
+    await userEvent.click(inactiveCityLink);
+
+    expect(mockChangeCity).toBeCalled();
+    expect(mockChangeCity).toHaveBeenCalledWith(CITIES[1]);
   });
 });

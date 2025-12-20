@@ -38,24 +38,28 @@ export default function Login(): JSX.Element {
             <h1 className="login__title">Sign in</h1>
             <form className="login__form form" onSubmit={handleSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
+                <label className="visually-hidden" htmlFor='email'>E-mail</label>
                 <input
                   className="login__input form__input"
+                  id="email"
                   type="email"
                   name="email"
                   ref={emailRef}
                   placeholder="Email"
+                  data-testid='email-element'
                   required
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
+                <label className="visually-hidden" htmlFor='password'>Password</label>
                 <input
                   className="login__input form__input"
+                  id="password"
                   type="password"
                   name="password"
                   ref={passwordRef}
                   placeholder="Password"
+                  data-testid='password-element'
                   required
                 />
               </div>

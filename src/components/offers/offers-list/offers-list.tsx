@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { PlaceCardI } from '../../../types/offer';
-import OfferCard from '../offer-card/offer-card';
+import { OfferCardMemoized } from '../../../hocs';
 
 interface OffersListProps {
   offers: PlaceCardI[];
@@ -22,13 +22,14 @@ export default function OffersList({ offers, size, cardClass, onListItemHover, o
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <OfferCard
+        <OfferCardMemoized
           key={offer.id}
           offer={offer}
           size={size}
           cardClass={cardClass}
           onMouseOver={handleHoverOffer}
           onMouseLeave={handleBlurOffer}
+          dataTestId='offer-card'
         />
       ))}
     </div>

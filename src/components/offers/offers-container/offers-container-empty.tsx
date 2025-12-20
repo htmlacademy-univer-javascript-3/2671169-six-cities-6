@@ -2,7 +2,7 @@ interface CitiesContainerEmptyProps {
     city: string;
 }
 
-export default function CitiesContainerEmpty({ city }: CitiesContainerEmptyProps): JSX.Element {
+export default function OffersContainerEmpty({ city }: CitiesContainerEmptyProps): JSX.Element {
   return (
     <div className="cities__places-container cities__places-container--empty container" data-testid='cities-empty'>
       <section className="cities__no-places">

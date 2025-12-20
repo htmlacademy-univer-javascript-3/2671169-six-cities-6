@@ -1,4 +1,4 @@
-import { CITIES } from '../../../const';
+import { CITIES } from '../../const';
 
 interface CitiesListProps {
   changeCity: (city: string) => void;

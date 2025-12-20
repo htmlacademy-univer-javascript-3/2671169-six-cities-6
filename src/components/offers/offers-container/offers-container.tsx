@@ -5,8 +5,8 @@ import { PlaceCardI, PointI } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks/redux';
 import PlacesSorting from '../../places-sorting/places-sorting';
 
-export default function CitiesContainer() {
-  const offers = useAppSelector((state) => state.offers.offers);
+export default function OffersContainer() {
+  const { offers } = useAppSelector((state) => state.offers);
   const cityName = useAppSelector((state) => state.offers.city);
 
   const cityOffers = useMemo(() => offers.filter((offer) => offer.city.name === cityName), [offers, cityName]);
