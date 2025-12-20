@@ -2,10 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getCurrentOffer, getNearPlaces } from '../../store/api-actions/offers';
 import { PlaceCardI, PointI } from '../../types/offer';
-import { OfferCardMemoized } from '../../hocs';
+import { OfferBodyMemoized, OfferCardMemoized } from '../../hocs';
 import { useParams } from 'react-router-dom';
-import OfferBody from '../../components/offers/offer-body/offer-body';
-import Spinner from '../../components/spinner/spinner';
+import Spinner from '../loading/spinner';
 
 export default function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -40,18 +39,17 @@ export default function Offer(): JSX.Element {
     <div className="page">
       <main className="page__main page__main--offer">
         {offerId && !isCurrentOfferLoading && currentOffer ? (
-          <OfferBody
+          <OfferBodyMemoized
             points={points}
             selectedPoint={selectedPoint}
             currentOffer={currentOffer}
-            offerId={offerId}
           />
         ) : (
           <Spinner />
         )}
         <div className="container">
           <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <h2 className="near-places__title">Other places in the neighborhood</h2>
             {isNearbyLoading ? (
               <Spinner />
             ) : (
@@ -64,6 +62,7 @@ export default function Offer(): JSX.Element {
                     size
                     onMouseOver={handleListItemHover}
                     onMouseLeave={handleListItemBlur}
+                    dataTestId='near-places'
                   />
                 ))}
               </div>

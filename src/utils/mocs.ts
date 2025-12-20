@@ -1,5 +1,5 @@
 import { AuthStatus } from '../const';
-import { OfferI } from '../types/offer';
+import { OfferI, PointI } from '../types/offer';
 import { ReviewI } from '../types/reviews';
 import { OffersState, ReviewState, RootState, UserState } from '../types/state';
 import { UserI } from '../types/user';
@@ -30,7 +30,7 @@ export const makeFakeOffersList = (): OfferI[] => {
       type: '',
       price: 200,
       city: {
-        name: '',
+        name: 'Paris',
         location: {
           latitude: 1,
           longitude: 1,
@@ -73,7 +73,7 @@ export const makeFakeFavorites = () => {
     type: '',
     price: 200,
     city: {
-      name: '',
+      name: 'Paris',
       location: {
         latitude: 1,
         longitude: 1,
@@ -114,10 +114,17 @@ export const makeFakeUser = (): UserI => ({
   name: '',
   avatarUrl: '',
   isPro: false,
-  email: '',
+  email: 'test@tes.ru',
   token: '',
 });
 
+export const makeFakePoints = (): PointI[] => new Array(3).fill(null).map(() => (
+  {
+    latitude: 43.123,
+    longitude: 40.456,
+    zoom: 10,
+  }
+));
 
 export const makeFakeUserState = (
   overrides?: Partial<UserState>
@@ -155,9 +162,9 @@ export const makeFakeReviewsState = (
 });
 
 export type RootStateOverrides = {
-    user?: Partial<UserState>;
-    offers?: Partial<OffersState>;
-    reviews?: Partial<ReviewState>;
+  user?: Partial<UserState>;
+  offers?: Partial<OffersState>;
+  reviews?: Partial<ReviewState>;
 };
 
 export const makeFakeStore = (

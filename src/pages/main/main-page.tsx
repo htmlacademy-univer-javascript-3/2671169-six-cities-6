@@ -3,15 +3,15 @@ import { useCallback, useEffect } from 'react';
 import { CitiesListMemoized } from '../../hocs';
 import { changeCity } from '../../store/offers-data/offers-data';
 import { getOffers } from '../../store/api-actions/offers';
-import CitiesContainer from '../../components/cities/cities-container/cities-container';
-import CitiesContainerEmpty from '../../components/cities/cities-container/cities-container-empty';
-import Spinner from '../../components/spinner/spinner';
+import OffersContainer from '../../components/offers/offers-container/offers-container';
+import OffersContainerEmpty from '../../components/offers/offers-container/offers-container-empty';
+import Spinner from '../loading/spinner';
 
 export default function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const cityName = useAppSelector((state) => state.offers.city);
-  const isOffersLoading = useAppSelector((state) => state.offers.isOffersLoading);
-  const cities = useAppSelector((state) => state.offers.offers);
+  const { isOffersLoading } = useAppSelector((state) => state.offers);
+  const { offers } = useAppSelector((state) => state.offers);
 
   useEffect(() => {
     dispatch(getOffers());
@@ -37,10 +37,10 @@ export default function MainPage(): JSX.Element {
             </section>
           </div>
           <div className="cities">
-            {cities ? (
-              <CitiesContainer />
+            {offers ? (
+              <OffersContainer />
             ) : (
-              <CitiesContainerEmpty city={cityName} />
+              <OffersContainerEmpty city={cityName} />
             )}
           </div>
         </main>

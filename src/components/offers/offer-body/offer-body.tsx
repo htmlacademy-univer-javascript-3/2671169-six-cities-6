@@ -6,18 +6,16 @@ import { OfferI, PointI } from '../../../types/offer';
 import { useNavigate } from 'react-router-dom';
 import { AuthStatus } from '../../../const';
 import { useEffect } from 'react';
-import Spinner from '../../spinner/spinner';
+import Spinner from '../../../pages/loading/spinner';
 
 interface OfferBodyProps {
   points: PointI[];
   selectedPoint: PointI | undefined;
   currentOffer: OfferI;
-  offerId: string;
 }
 
-export default function OfferBody({ points, selectedPoint, currentOffer, offerId }: OfferBodyProps) {
+export default function OfferBody({ points, selectedPoint, currentOffer }: OfferBodyProps) {
   const dispatch = useAppDispatch();
-  const { reviews } = useAppSelector((state) => state.reviews);
   const { isReviewsLoading } = useAppSelector((state) => state.reviews);
   const { authorizationStatus } = useAppSelector((state) => state.user);
   const city = currentOffer?.city;
@@ -25,8 +23,8 @@ export default function OfferBody({ points, selectedPoint, currentOffer, offerId
   const navigator = useNavigate();
 
   useEffect(() => {
-    dispatch(getReviewsList(offerId));
-  }, [offerId, dispatch]);
+    dispatch(getReviewsList(currentOffer.id));
+  }, [currentOffer.id, dispatch]);
 
   const handleChangeFavorite = () => {
     if (authorizationStatus !== AuthStatus.Auth) {
@@ -134,7 +132,7 @@ export default function OfferBody({ points, selectedPoint, currentOffer, offerId
           {isReviewsLoading ? (
             <Spinner />
           ) : (
-            <ReviewsListMemoized reviews={reviews} offerId={offerId} />
+            <ReviewsListMemoized offerId={currentOffer.id} />
           )}
         </div>
       </div>

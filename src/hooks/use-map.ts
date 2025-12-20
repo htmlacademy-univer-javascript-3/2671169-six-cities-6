@@ -34,7 +34,7 @@ function useMap(
       instance.addLayer(layer);
       setMap(instance);
     }
-  }, [mapRef, map, city]);
+  }, [mapRef, city]);
 
   return map;
 }

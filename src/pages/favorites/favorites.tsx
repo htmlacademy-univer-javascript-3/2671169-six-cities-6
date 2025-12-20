@@ -3,7 +3,7 @@ import { PlaceCardI } from '../../types/offer';
 import { AppRoute } from '../../const';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import OfferCard from '../../components/offers/offer-card/offer-card';
+import { OfferCardMemoized } from '../../hocs';
 
 export interface FavoritesProps {
   offers: PlaceCardI[];
@@ -47,7 +47,7 @@ export default function Favorites() {
                   </div>
                   <div className="favorites__places">
                     {groupOffersByCity[city].map((offer) => (
-                      <OfferCard key={offer.id} offer={offer} cardClass='favorites' dataTestId='favorites-test'/>
+                      <OfferCardMemoized key={offer.id} offer={offer} cardClass='favorites' dataTestId='favorites-test'/>
                     ))}
                   </div>
                 </li>

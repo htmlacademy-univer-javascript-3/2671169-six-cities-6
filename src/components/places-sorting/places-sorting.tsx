@@ -3,7 +3,7 @@ import { SORTING_OPTIONS, SortingOptionsType } from '../../const';
 
 interface PlacesSortingProps {
   sortingHandler: (sortType: SortingOptionsType) => void;
-  activeOption: string;
+  activeOption: SortingOptionsType;
 }
 
 export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSortingProps): JSX.Element {
@@ -29,7 +29,11 @@ export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSo
   }, []);
 
   return (
-    <form className="places__sorting" action="#" method="get" ref={sortingRef}>
+    <form
+      className="places__sorting"
+      ref={sortingRef}
+      data-testid='places-sorting'
+    >
       <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type" tabIndex={0}
@@ -40,19 +44,22 @@ export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSo
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom 
-                ${isOpen ? 'places__options--opened' : ''}`}
+      <ul className={
+        `places__options places__options--custom ${isOpen ? 'places__options--opened' : ''}`
+      }
       >
         {SORTING_OPTIONS.map((option) => (
           <li
             key={option}
-            className={`places__option
-                            ${option === activeOption ? 'places__option--active' : ''}`}
+            className={
+              `places__option ${option === activeOption ? 'places__option--active' : ''}`
+            }
             tabIndex={0}
             onClick={() => {
               sortingHandler(option);
               handleOpening();
             }}
+            data-testid="place-option"
           >
             {option}
           </li>

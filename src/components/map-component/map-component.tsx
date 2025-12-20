@@ -68,6 +68,7 @@ export default function MapComponent({ city, points, selectedPoint, mapClass }: 
     <section
       ref={mapRef}
       className={`${mapClass} map`}
+      data-testid='map-section'
     >
     </section>
   );

@@ -44,9 +44,6 @@ describe('Application Routing', () => {
     const mockOffers = makeFakeOffersList();
     mockOffers[0].isPremium = true;
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
-      user: {
-        authorizationStatus: AuthStatus.Auth,
-      },
       offers: {
         currentOffer: mockOffers[0]
       }
@@ -64,7 +61,7 @@ describe('Application Routing', () => {
     const { mockOffers, mockFavorites } = makeFakeFavorites();
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       user: {
-        authorizationStatus: AuthStatus.Auth,
+        authorizationStatus: AuthStatus.Auth
       },
       offers: {
         offers: mockOffers,

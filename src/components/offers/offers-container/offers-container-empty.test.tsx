@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import CitiesContainerEmpty from './cities-container-empty';
+import CitiesContainerEmpty from './offers-container-empty';
 
 describe('Component: CitiesContainerEmpty', () => {
   it('should render empty state with city name', () => {

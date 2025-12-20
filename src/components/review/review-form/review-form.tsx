@@ -36,7 +36,13 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+      data-testid="reviews-form"
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {[5, 4, 3, 2, 1].map((value) => (
@@ -49,6 +55,7 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
               type="radio"
               checked={formData.rating === value}
               onChange={handleInputChange}
+              data-testid={`rating-${value}`}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={ratingTitles[value]}>
               <svg className="form__star-image" width="37" height="33">
@@ -65,6 +72,7 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleInputChange}
         value={formData.comment}
+        data-testid="review-textarea"
       >
       </textarea>
       <div className="reviews__button-wrapper">
