@@ -10,7 +10,7 @@ describe('Component: PlacesSorting', () => {
   it('should render correctly', () => {
     render(
       <PlacesSorting
-        sortingHandler={sortingHandler}
+        onSortingHandler={sortingHandler}
         activeOption={placesOptions[0]}
       />
     );
@@ -25,7 +25,7 @@ describe('Component: PlacesSorting', () => {
   it('should call "sortingHandler" when user changes filter', async () => {
     render(
       <PlacesSorting
-        sortingHandler={sortingHandler}
+        onSortingHandler={sortingHandler}
         activeOption={placesOptions[0]}
       />
     );

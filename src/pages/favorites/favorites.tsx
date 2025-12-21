@@ -3,7 +3,7 @@ import { PlaceCardI } from '../../types/offer';
 import { AppRoute } from '../../const';
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { OfferCardMemoized } from '../../hocs';
+import { OfferCardMemoized } from '../../hocs/memo';
 
 export interface FavoritesProps {
   offers: PlaceCardI[];

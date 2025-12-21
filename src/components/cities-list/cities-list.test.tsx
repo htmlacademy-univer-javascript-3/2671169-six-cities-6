@@ -10,7 +10,7 @@ describe('CitiesList', () => {
     render(
       <CitiesList
         currentCity={CITIES[0]}
-        changeCity={mockChangeCity}
+        onChangeCity={mockChangeCity}
       />
     );
 
@@ -25,7 +25,7 @@ describe('CitiesList', () => {
     render(
       <CitiesList
         currentCity={currentCity}
-        changeCity={mockChangeCity}
+        onChangeCity={mockChangeCity}
       />
     );
 
@@ -42,7 +42,7 @@ describe('CitiesList', () => {
     render(
       <CitiesList
         currentCity={currentCity}
-        changeCity={mockChangeCity}
+        onChangeCity={mockChangeCity}
       />
     );
 
@@ -57,7 +57,7 @@ describe('CitiesList', () => {
     render(
       <CitiesList
         currentCity={CITIES[0]}
-        changeCity={mockChangeCity}
+        onChangeCity={mockChangeCity}
       />
     );
 

@@ -1,6 +1,6 @@
-import { MapComponentMemoized, OffersListMemoized } from '../../../hocs';
+import { MapComponentMemoized, OffersListMemoized } from '../../../hocs/memo';
 import { useCallback, useMemo, useState } from 'react';
-import { SortingOptionsType } from '../../../const';
+import { SortingOptionsType, SortOptions } from '../../../const';
 import { PlaceCardI, PointI } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks/redux';
 import PlacesSorting from '../../places-sorting/places-sorting';
@@ -15,15 +15,15 @@ export default function OffersContainer() {
   const points = cityOffers.map((offer) => offer.location);
   const [selectedPoint, setSelectedPoint] = useState<PointI | undefined>(undefined);
 
-  const [option, setOption] = useState<SortingOptionsType>('Popular');
+  const [option, setOption] = useState<SortingOptionsType>(SortOptions.Popular);
 
   const sortedOffers = useMemo(() => {
     switch (option) {
-      case 'Price: low to high':
+      case SortOptions.PriceLowToHigh:
         return [...cityOffers].sort((a: PlaceCardI, b: PlaceCardI) => a.price - b.price);
-      case 'Price: high to low':
+      case SortOptions.PriceHighToLow:
         return [...cityOffers].sort((a: PlaceCardI, b: PlaceCardI) => b.price - a.price);
-      case 'Top rated first':
+      case SortOptions.TopRated:
         return [...cityOffers].sort((a: PlaceCardI, b: PlaceCardI) => b.rating - a.rating);
       default:
         return cityOffers;
@@ -50,7 +50,7 @@ export default function OffersContainer() {
         </b>
 
         <PlacesSorting
-          sortingHandler={setOption}
+          onSortingHandler={setOption}
           activeOption={option}
         />
 

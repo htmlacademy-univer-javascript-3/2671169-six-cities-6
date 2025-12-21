@@ -18,9 +18,17 @@ function HeaderNavigation() {
   };
 
   useEffect(() => {
-    if (auth) {
-      dispatch(getFavorite());
+    let isMounted = true;
+
+    if (isMounted) {
+      if (auth === AuthStatus.Auth) {
+        dispatch(getFavorite());
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, auth]);
 
   if (auth === AuthStatus.Unknown || auth === AuthStatus.NotAuth && location.pathname !== '/login') {

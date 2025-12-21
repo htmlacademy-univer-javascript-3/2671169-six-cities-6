@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { PlaceCardI } from '../../../types/offer';
-import { OfferCardMemoized } from '../../../hocs';
+import { OfferCardMemoized } from '../../../hocs/memo';
 
 interface OffersListProps {
   offers: PlaceCardI[];

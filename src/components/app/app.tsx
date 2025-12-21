@@ -16,7 +16,15 @@ export default function App() {
   const dispatch = useAppDispatch();
   const { authorizationStatus } = useAppSelector((state) => state.user);
   useEffect(() => {
-    dispatch(authorizeUser());
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(authorizeUser());
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 
   return (

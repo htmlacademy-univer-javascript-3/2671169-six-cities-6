@@ -25,9 +25,17 @@ export default function Login(): JSX.Element {
   };
 
   useEffect(() => {
-    if (authorizationStatus === AuthStatus.Auth) {
-      navigate(AppRoute.Root);
+    let isMounted = true;
+
+    if (isMounted) {
+      if (authorizationStatus === AuthStatus.Auth) {
+        navigate(AppRoute.Root);
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   });
 
   return (

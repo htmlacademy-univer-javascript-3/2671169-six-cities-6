@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { SORTING_OPTIONS, SortingOptionsType } from '../../const';
 
 interface PlacesSortingProps {
-  sortingHandler: (sortType: SortingOptionsType) => void;
+  onSortingHandler: (sortType: SortingOptionsType) => void;
   activeOption: SortingOptionsType;
 }
 
-export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSortingProps): JSX.Element {
+export default function PlacesSorting({ onSortingHandler, activeOption }: PlacesSortingProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const sortingRef = useRef<HTMLFormElement | null>(null);
 
@@ -15,15 +15,19 @@ export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSo
   };
 
   useEffect(() => {
+    let isMounted = true;
     const handleClickOutside = (event: MouseEvent) => {
       if (sortingRef.current && !sortingRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    if (isMounted) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
 
     return () => {
+      isMounted = false;
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
@@ -56,7 +60,7 @@ export default function PlacesSorting({ sortingHandler, activeOption }: PlacesSo
             }
             tabIndex={0}
             onClick={() => {
-              sortingHandler(option);
+              onSortingHandler(option);
               handleOpening();
             }}
             data-testid="place-option"
