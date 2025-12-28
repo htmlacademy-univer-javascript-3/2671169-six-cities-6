@@ -1,5 +1,5 @@
 import { authorizeUser, loginUser, logoutUser } from '../api-actions/user';
-import { makeFakeUser } from '../../utils/mocs';
+import { makeFakeUser } from '../../utils/mocks';
 import { UsersSlice } from '../user-data/user-data';
 import { AuthStatus } from '../../const';
 import { UserState } from '../../types/state';

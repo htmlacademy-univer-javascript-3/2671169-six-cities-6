@@ -1,5 +1,5 @@
 import { withHistory, withStore } from '../../utils/mock-component';
-import { makeFakeStore, makeFakeUser } from '../../utils/mocs';
+import { makeFakeStore, makeFakeUser } from '../../utils/mocks';
 import { ApiRoute, AppRoute, AuthStatus } from '../../const';
 import { render, screen } from '@testing-library/react';
 import Header from './header';

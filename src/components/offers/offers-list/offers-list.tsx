@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { PlaceCardI } from '../../../types/offer';
 import { OfferCardMemoized } from '../../../hocs/memo';
 
-interface OffersListProps {
+export interface OffersListProps {
   offers: PlaceCardI[];
   size?: boolean;
   cardClass: string;

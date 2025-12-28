@@ -156,6 +156,7 @@ export const makeFakeReviewsState = (
   overrides?: Partial<ReviewState>
 ): ReviewState => ({
   reviews: [],
+  isFormSubmitting: false,
   isReviewsLoading: false,
   error: null,
   ...overrides

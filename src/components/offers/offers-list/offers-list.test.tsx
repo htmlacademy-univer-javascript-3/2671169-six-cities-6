@@ -1,14 +1,14 @@
-import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocs';
-import { render, screen } from '@testing-library/react';
-import { withHistory, withStore } from '../../../utils/mock-component';
-import OffersList from './offers-list';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocks';
+import OffersList, { OffersListProps } from './offers-list';
+import { withHistory, withStore } from '../../../utils/mock-component';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('Component: OffersList', () => {
   let mockHistory: MemoryHistory;
-  const mockHoverCard = vi.fn();
-  const mockLeaveCard = vi.fn();
+  const mockHoverCard: OffersListProps['onListItemHover'] = vi.fn();
+  const mockLeaveCard: OffersListProps['onListItemBlur'] = vi.fn();
 
   beforeEach(() => {
     mockHistory = createMemoryHistory();

@@ -1,5 +1,5 @@
 import { createMemoryHistory, MemoryHistory } from 'history';
-import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocs';
+import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocks';
 import { withHistory, withStore } from '../../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
 import OfferCard from './offer-card';

@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { CITIES } from '../../const';
-import CitiesList from './cities-list';
+import CitiesList, { CitiesListProps } from './cities-list';
 import userEvent from '@testing-library/user-event';
 
 describe('CitiesList', () => {
-  const mockChangeCity = vi.fn();
+  const mockChangeCity: CitiesListProps['onChangeCity'] = vi.fn();
 
   it('should render list of cities', () => {
     render(

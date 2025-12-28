@@ -1,4 +1,4 @@
-import { makeFakeOffersList, makeFakeReviewsList, makeFakeUser } from '../../utils/mocs';
+import { makeFakeOffersList, makeFakeReviewsList, makeFakeUser } from '../../utils/mocks';
 import { getCurrentOffer, getNearPlaces, getOffers } from './offers';
 import { authorizeUser, loginUser, logoutUser } from './user';
 import { changeFavoriteStatus, getFavorite } from './favorite';

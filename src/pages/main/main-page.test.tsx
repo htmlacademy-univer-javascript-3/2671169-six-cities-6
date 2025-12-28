@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component';
-import { makeFakeOffersList, makeFakeStore } from '../../utils/mocs';
+import { makeFakeOffersList, makeFakeStore } from '../../utils/mocks';
 import MainPage from './main-page';
 
 describe('Component: MainPage', () => {

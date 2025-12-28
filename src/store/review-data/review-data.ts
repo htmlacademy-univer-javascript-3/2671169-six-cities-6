@@ -5,6 +5,7 @@ import { ReviewState } from '../../types/state';
 const initialState: ReviewState = {
   reviews: [],
   isReviewsLoading: false,
+  isFormSubmitting: false,
   error: null,
 };
 
@@ -28,15 +29,15 @@ export const ReviewSlice = createSlice({
       })
 
       .addCase(postReview.pending, (state) => {
-        state.isReviewsLoading = true;
+        state.isFormSubmitting = true;
         state.error = null;
       })
       .addCase(postReview.fulfilled, (state, action) => {
         state.reviews.push(action.payload);
-        state.isReviewsLoading = false;
+        state.isFormSubmitting = false;
       })
       .addCase(postReview.rejected, (state, action) => {
-        state.isReviewsLoading = false;
+        state.isFormSubmitting = false;
         state.error = action.payload as string;
       });
   }

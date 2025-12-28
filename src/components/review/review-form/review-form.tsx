@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { postReview } from '../../../store/api-actions/review';
 
 const ratingTitles: Record<number, string> = {
@@ -13,10 +13,10 @@ const ratingTitles: Record<number, string> = {
 export default function ReviewForm({ offerId }: { offerId: string }) {
   const dispatch = useAppDispatch();
 
-  const [formData, setFormData] = useState({
-    comment: '',
-    rating: 0
-  });
+  const { isFormSubmitting } = useAppSelector((state) => state.reviews);
+  const { error } = useAppSelector((state) => state.reviews);
+
+  const [formData, setFormData] = useState({ comment: '', rating: 0 });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -38,12 +38,12 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
   return (
     <form
       className="reviews__form form"
-      action="#"
-      method="post"
       onSubmit={handleSubmit}
       data-testid="reviews-form"
     >
-      <label className="reviews__label form__label" htmlFor="review">Your review</label>
+      <label className="reviews__label form__label" htmlFor="review">
+        Your review
+      </label>
       <div className="reviews__rating-form form__rating">
         {[5, 4, 3, 2, 1].map((value) => (
           <Fragment key={value}>
@@ -55,6 +55,7 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
               type="radio"
               checked={formData.rating === value}
               onChange={handleInputChange}
+              disabled={isFormSubmitting}
               data-testid={`rating-${value}`}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={ratingTitles[value]}>
@@ -72,9 +73,13 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleInputChange}
         value={formData.comment}
+        disabled={isFormSubmitting}
         data-testid="review-textarea"
       >
       </textarea>
+
+      {error && <p className='reviews__error' style={{ color: 'red' }}>{error}</p>}
+
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -88,7 +93,7 @@ export default function ReviewForm({ offerId }: { offerId: string }) {
             || formData.comment.length > 300
           }
         >
-          Submit
+          {isFormSubmitting ? 'Submitting...' : 'Submit'}
         </button>
       </div>
     </form>

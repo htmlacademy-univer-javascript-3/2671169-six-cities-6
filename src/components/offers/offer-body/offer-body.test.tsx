@@ -1,4 +1,4 @@
-import { makeFakeOffersList, makeFakePoints, makeFakeStore } from '../../../utils/mocs';
+import { makeFakeOffersList, makeFakePoints, makeFakeStore } from '../../../utils/mocks';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { withHistory, withStore } from '../../../utils/mock-component';
 import { render, screen } from '@testing-library/react';

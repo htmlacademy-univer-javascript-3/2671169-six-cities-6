@@ -1,6 +1,6 @@
 import { withHistory, withStore } from '../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
-import { makeFakeStore } from '../../utils/mocs';
+import { makeFakeStore } from '../../utils/mocks';
 import Login from './login';
 import userEvent from '@testing-library/user-event';
 
@@ -12,7 +12,7 @@ describe('Component: Login', () => {
     render(withStoreComponent);
 
     const loginButton = screen.getByRole('button', { name: /Sign in/i });
-    const navigationLink = screen.getByRole('link', { name: /Amsterdam/i });
+    const navigationLink = screen.getByTestId('random-city-link');
 
     expect(screen.getByRole('heading', { name: /sign in/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/E-mail/i)).toBeInTheDocument();

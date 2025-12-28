@@ -1,7 +1,7 @@
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { withHistory, withStore } from '../../../utils/mock-component';
 import OffersContainer from './offers-container';
-import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocs';
+import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocks';
 import { render, screen } from '@testing-library/react';
 
 describe('Component: OffersContainer', () => {

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { SORTING_OPTIONS, SortingOptionsType } from '../../const';
 
-interface PlacesSortingProps {
+export interface PlacesSortingProps {
   onSortingHandler: (sortType: SortingOptionsType) => void;
   activeOption: SortingOptionsType;
 }

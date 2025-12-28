@@ -1,5 +1,5 @@
 import { getCurrentOffer, getNearPlaces, getOffers } from '../api-actions/offers';
-import { makeFakeFavorites, makeFakeOffersList } from '../../utils/mocs';
+import { makeFakeFavorites, makeFakeOffersList } from '../../utils/mocks';
 import { changeFavoriteStatus, getFavorite } from '../api-actions/favorite';
 import { changeCity, OffersSlice } from './offers-data';
 import { OffersState } from '../../types/state';

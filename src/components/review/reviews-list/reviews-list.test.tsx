@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../../utils/mock-component';
-import { makeFakeOffersList, makeFakeReviewsList, makeFakeStore } from '../../../utils/mocs';
+import { makeFakeOffersList, makeFakeReviewsList, makeFakeStore } from '../../../utils/mocks';
 import ReviewsList from './reviews-list';
 import { AuthStatus } from '../../../const';
 

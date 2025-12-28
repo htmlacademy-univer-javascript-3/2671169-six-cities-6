@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Review from './review-item';
 import { ReviewI } from '../../../types/reviews';
-import { makeFakeReviewsList } from '../../../utils/mocs';
+import { makeFakeReviewsList } from '../../../utils/mocks';
 
 describe('Review', () => {
   const mockReview: ReviewI = makeFakeReviewsList()[0];

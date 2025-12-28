@@ -1,6 +1,6 @@
 import { withStore } from '../../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
-import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocs';
+import { makeFakeOffersList, makeFakeStore } from '../../../utils/mocks';
 import ReviewForm from './review-form';
 import userEvent from '@testing-library/user-event';
 

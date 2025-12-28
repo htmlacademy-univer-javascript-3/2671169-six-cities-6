@@ -20,6 +20,7 @@ export interface OffersState {
 export interface ReviewState {
     reviews: ReviewI[];
     isReviewsLoading: boolean;
+    isFormSubmitting: boolean;
     error: string | null;
 }
 

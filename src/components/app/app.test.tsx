@@ -1,7 +1,7 @@
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { render, screen } from '@testing-library/react';
-import { makeFakeFavorites, makeFakeOffersList, makeFakeStore } from '../../utils/mocs';
+import { makeFakeFavorites, makeFakeOffersList, makeFakeStore } from '../../utils/mocks';
 import { AppRoute, AuthStatus } from '../../const';
 import App from './app';
 
@@ -34,7 +34,7 @@ describe('Application Routing', () => {
     render(withStoreComponent);
 
     expect(screen.getByRole('heading', { name: /sign in/i })).toBeInTheDocument();
-    expect(screen.getByText(/Amsterdam/i));
+    expect(screen.getByTestId('random-city-link')).toBeInTheDocument();
     const submitButton = screen.getByRole('button', { name: /sign in/i });
     expect(submitButton).toBeInTheDocument();
   });

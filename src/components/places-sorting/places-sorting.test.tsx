@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import PlacesSorting from './places-sorting';
+import PlacesSorting, { PlacesSortingProps } from './places-sorting';
 import { SORTING_OPTIONS, SortingOptionsType } from '../../const';
 import userEvent from '@testing-library/user-event';
 
 describe('Component: PlacesSorting', () => {
-  const sortingHandler = vi.fn();
+  const sortingHandler: PlacesSortingProps['onSortingHandler'] = vi.fn();
   const placesOptions: SortingOptionsType[] = SORTING_OPTIONS;
 
   it('should render correctly', () => {

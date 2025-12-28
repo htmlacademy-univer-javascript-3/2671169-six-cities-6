@@ -1,26 +1,38 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { AppRoute, AuthStatus } from '../../const';
-import { useEffect, useRef } from 'react';
+import { AppRoute, AuthStatus, CITIES } from '../../const';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../store/api-actions/user';
+import { changeCity } from '../../store/offers-data/offers-data';
 
 export default function Login(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const { authorizationStatus } = useAppSelector((state) => state.user);
 
-  const navigate = useNavigate();
+  const [validationError, setValidationError] = useState('');
+
+  const randomCity = useMemo(() => CITIES[Math.floor(Math.random() * CITIES.length)], []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (emailRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginUser({
-        email: emailRef.current.value,
-        password: passwordRef.current.value
-      }));
+      const password = passwordRef.current.value;
+      const email = emailRef.current.value;
+      const isValidPassword = /[A-Za-z]/.test(password) && /\d/.test(password);
+
+      if (!isValidPassword) {
+        setValidationError('Password must contain at least one letter and one number');
+        return;
+      }
+
+      setValidationError('');
+      dispatch(loginUser({ email, password }));
     }
   };
 
@@ -36,7 +48,12 @@ export default function Login(): JSX.Element {
     return () => {
       isMounted = false;
     };
-  });
+  }, [authorizationStatus, navigate]);
+
+  const handleRandomCityClick = () => {
+    dispatch(changeCity(randomCity));
+    navigate(AppRoute.Root);
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -71,6 +88,12 @@ export default function Login(): JSX.Element {
                   required
                 />
               </div>
+              {validationError &&
+                <p
+                  style={{ color: 'red' }}
+                >
+                  {validationError}
+                </p>}
               <button
                 className="login__submit form__submit button"
                 type="submit"
@@ -81,8 +104,11 @@ export default function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
+              <a
+                className="locations__item-link"
+                onClick={handleRandomCityClick}
+              >
+                <span data-testid="random-city-link">{randomCity}</span>
               </a>
             </div>
           </section>
